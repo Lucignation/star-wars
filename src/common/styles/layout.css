@@ -1,0 +1,10 @@
+.container-layout {
+  display: grid;
+  grid-template-columns: 78% 20%;
+  grid-gap: 2%;
+}
+
+.card {
+  padding: 6% 12%;
+  box-shadow: 0px 4px 35px 0px #a8acb030;
+}

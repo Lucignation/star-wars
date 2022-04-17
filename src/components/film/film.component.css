@@ -1,0 +1,17 @@
+.film-card {
+  margin-bottom: 10px !important;
+}
+
+.film-planet-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.film-planet-card {
+  border: 1px solid #0097d3ce;
+  text-align: center;
+  margin-left: 9px;
+  padding: 3px 7px;
+  border-radius: 4px;
+  cursor: pointer;
+}
