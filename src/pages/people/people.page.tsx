@@ -21,13 +21,18 @@ const People: React.FC<myProps> = ({ resources }) => {
   let filterPeople = allPeople.filter(({ name }) => {
     return name.toLowerCase().indexOf(search.toLowerCase()) >= 0;
   });
+  console.log(filterPeople);
   return (
     <div>
       <Search search={search} setSearch={setSearch} />
       <div className='people-container'>
-        {filterPeople?.map((person, index) => (
-          <PeopleComponent person={person} key={index} />
-        ))}
+        {filterPeople.length === 0 ? (
+          <p>No search matched. </p>
+        ) : (
+          filterPeople?.map((person, index) => (
+            <PeopleComponent person={person} key={index} />
+          ))
+        )}
       </div>
     </div>
   );

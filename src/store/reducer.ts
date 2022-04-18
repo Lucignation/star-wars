@@ -125,24 +125,28 @@ function resourcesReducer(state: Store = initialState, action: ActionTypes) {
       return {
         ...state,
         films: action.payload,
+        isLoading: false,
       };
 
     case SET_FILM:
       return {
         ...state,
         film: action.payload,
+        isLoading: false,
       };
 
     case SET_PLANET:
       return {
         ...state,
         planet: action.payload,
+        isLoading: false,
       };
 
     case SET_VEHICLES:
       return {
         ...state,
         vehicles: action.payload,
+        isLoading: false,
       };
 
     case APP_STATE:

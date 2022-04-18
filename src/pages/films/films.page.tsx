@@ -24,9 +24,11 @@ const Films: React.FC<props> = ({ isLoading, films }) => {
     <div>
       <Search search={search} setSearch={setSearch} />
       <div className='film-container'>
-        {filterFilms.map((film, index) => (
-          <Film key={index} film={film} />
-        ))}
+        {filterFilms.length === 0 ? (
+          <p>No search matched. </p>
+        ) : (
+          filterFilms.map((film, index) => <Film key={index} film={film} />)
+        )}
       </div>
     </div>
   );

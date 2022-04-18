@@ -31,7 +31,7 @@ export type ActionTypes =
 export const getPeople = () => async (dispatch: any) => {
   return new Promise(async (resolve, reject) => {
     try {
-      setLoading();
+      dispatch(setLoading());
       const url = 'https://' + process.env.REACT_APP_PEOPLE;
       const people = await axios.get(url);
       dispatch({
@@ -61,7 +61,7 @@ export const setFilms = (films: IFilm[]): ActionTypes => ({
 export const getFilms = () => async (dispatch: any) => {
   return new Promise(async (resolve, reject) => {
     try {
-      setLoading();
+      dispatch(setLoading());
       const url = 'https://' + process.env.REACT_APP_FILMS;
       const films = await axios.get(url);
       dispatch({
@@ -85,6 +85,7 @@ export const setLoading = (): ActionTypes => ({
 export const getVehicles = () => async (dispatch: any) => {
   return new Promise(async (resolve, reject) => {
     try {
+      dispatch(setLoading());
       const url = 'https://' + process.env.REACT_APP_VEHICLES;
       const vehicle = await axios.get(url);
       console.log(vehicle.data.results);
@@ -101,6 +102,7 @@ export const getVehicles = () => async (dispatch: any) => {
 export const getFilm = (id: number) => async (dispatch: any) => {
   return new Promise(async (resolve, reject) => {
     try {
+      dispatch(setLoading());
       const url = `https://${process.env.REACT_APP_FILMS}/${id}`;
       const film = await axios.get(url);
       resolve(film.data);
@@ -120,6 +122,7 @@ export const getFilm = (id: number) => async (dispatch: any) => {
 export const getPlanet = (id: number) => async (dispatch: any) => {
   return new Promise(async (resolve, reject) => {
     try {
+      dispatch(setLoading());
       const url = `https://${process.env.REACT_APP_PLANETS}/${id}`;
       const planet = await axios.get(url);
       resolve(planet.data);

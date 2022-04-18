@@ -6,12 +6,15 @@ import { getVehicles } from '../../store/actions';
 import Vehicle from '../../components/vehicle/vehicle.component';
 import { IVehicle } from '../../common/interfaces/IVehicle';
 import Search from '../../components/search/search.component';
+import { Store } from '../../store/types';
+import Spinner from '../../utils/Spinner/Spinner';
 
 type props = {
   getVehicles: any;
+  isLoading: boolean;
 };
 
-const Vehicles: React.FC<props> = ({ getVehicles }) => {
+const Vehicles: React.FC<props> = ({ getVehicles, isLoading }) => {
   const [_vehicles, setVehicles] = useState<IVehicle[]>([]);
   const [search, setSearch] = useState<string>('');
 
@@ -31,12 +34,27 @@ const Vehicles: React.FC<props> = ({ getVehicles }) => {
 
   return (
     <div>
-      <Search search={search} setSearch={setSearch} />
-      {filterVehicle.map((vehicle, index) => (
-        <Vehicle key={index} vehicle={vehicle} />
-      ))}
+      {isLoading ? (
+        <Spinner />
+      ) : (
+        <div>
+          <Search search={search} setSearch={setSearch} />
+          {filterVehicle.length === 0 ? (
+            <p>No search matched.</p>
+          ) : (
+            filterVehicle.map((vehicle, index) => (
+              <Vehicle key={index} vehicle={vehicle} />
+            ))
+          )}
+        </div>
+      )}
     </div>
   );
 };
 
-export default connect(null, { getVehicles })(Vehicles);
+const mapPropsToState = (state: Store) => ({
+  isLoading: state.resources.isLoading,
+  favorite: state.resources.favorite,
+});
+
+export default connect(mapPropsToState, { getVehicles })(Vehicles);

@@ -1,5 +1,6 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, Suspense, useState } from 'react';
 import { connect } from 'react-redux';
+import { motion } from 'framer-motion';
 
 //Interfaces
 import { IPeople } from '../../common/interfaces/IPeople';
@@ -14,12 +15,11 @@ import People from '../people/people.page';
 import Search from '../../components/search/search.component';
 import Film from '../../components/film/film.component';
 import SideAttribute from '../../HOC/SideAttribute/SideAttribute';
+import Spinner from '../../utils/Spinner/Spinner';
 
 import './home.page.css';
 
 type myProps = {
-  setPeople: any;
-  setFilms: any;
   getPeople: any;
   getFilms: any;
   isLoading: boolean;
@@ -30,18 +30,21 @@ type myProps = {
 // const RenderedComponent = SideAttribute(Film, "films");
 
 const Home: React.FC<myProps> = ({
-  setPeople,
-  setFilms,
   isLoading,
   getPeople,
   getFilms,
   films,
   favorite,
 }) => {
+  const [people, setPeople] = useState<IPeople[]>([]);
+  const [_films, setFilms] = useState<IFilm[]>([]);
+
   useEffect(() => {
     const fetch = async () => {
-      await getPeople();
-      await getFilms();
+      const peopleRes = await getPeople();
+      setPeople(peopleRes);
+      const filmRes = await getFilms();
+      setFilms(filmRes);
       // console.log(data);
       // setPeople(res);
       // setFilms(data);
@@ -53,16 +56,31 @@ const Home: React.FC<myProps> = ({
   return (
     <div className='home'>
       <div className='home-container container-layout'>
-        <People />
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          <motion.div
+            initial={{ y: -250 }}
+            animate={{ y: 10 }}
+            exit={{ y: -250 }}
+            transition={{ ease: 'easeOut', duration: 0.3 }}
+          >
+            <People />
+          </motion.div>
+        )}
         <div>
           <h2>Films</h2>
-          {films.map((film, index) => (
-            <div className='card film-card' key={index}>
-              <p>Title: {film.title}</p>
-              <p>Director: {film.director}</p>
-              <p>Release Date: {film.release_date}</p>
-            </div>
-          ))}
+          {isLoading ? (
+            <Spinner />
+          ) : (
+            films.map((film, index) => (
+              <div className='card film-card' key={index}>
+                <p>Title: {film.title}</p>
+                <p>Director: {film.director}</p>
+                <p>Release Date: {film.release_date}</p>
+              </div>
+            ))
+          )}
         </div>
       </div>
     </div>
@@ -79,7 +97,5 @@ const mapPropsToState = (state: Store) => ({
 
 export default connect(mapPropsToState, {
   getPeople,
-  setPeople,
   getFilms,
-  setFilms,
 })(Home);
