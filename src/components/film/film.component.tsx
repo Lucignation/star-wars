@@ -31,7 +31,7 @@ const Film: React.FC<props> = ({ film, getPlanet }) => {
       <p>Title: {film.title}</p>
       <p>Director: {film.director}</p>
       <p>Release Date: {film.release_date}</p>
-      <div className='film-planet-grid'>
+      <div className='film-grid'>
         {film.planets.map((planet, index) => (
           <div key={index} onClick={() => planetSelected(planet, index)}>
             <Link title={`Planet ${index + 1}`} />

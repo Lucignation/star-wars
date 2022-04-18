@@ -1,0 +1,11 @@
+.back-btn p {
+  border: 1px solid #3a3a3ace;
+  color: #fff;
+  background-color: #3a3a3ace;
+  text-align: center;
+  margin-left: 5px;
+  padding: 4px 9px;
+  border-radius: 4px;
+  cursor: pointer;
+  width: 10%;
+}

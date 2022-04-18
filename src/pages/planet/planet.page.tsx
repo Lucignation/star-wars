@@ -7,6 +7,7 @@ import moment from 'moment';
 import { Store } from '../../store/types';
 import { IPlanet } from '../../common/interfaces/IPlanet';
 import { getFilm } from '../../store/actions';
+import Button from '../../components/button/button.component';
 
 type props = {
   planet: IPlanet;
@@ -29,7 +30,9 @@ const Planet: React.FC<props> = ({ planet, getFilm }) => {
   };
   return (
     <div>
-      <button onClick={() => handleBackBtn()}>Back</button>
+      <div onClick={() => handleBackBtn()}>
+        <Button title='Back' />
+      </div>
       <h2>Planet Name:{planet.name}</h2>
       <div>
         <p>Rotation Period: {planet.rotation_period}</p>

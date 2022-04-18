@@ -39,7 +39,7 @@ const PeopleComponent: React.FC<myProps> = ({ person, getFilm }) => {
         <h4>Height: {person.height}</h4>
         <h4>Mass: {person.mass}</h4>
       </div>
-      <div className='film-planet-grid'>
+      <div className='people-grid'>
         {person.films.map((film, index) => (
           <div key={index} onClick={() => handleSelectedFilm(film)}>
             <Link title={`Film ${index + 1}`} linkType='primary-link' />

@@ -6,6 +6,10 @@ import { useNavigate } from 'react-router-dom';
 import { Store } from '../../store/types';
 import { IVehicle } from '../../common/interfaces/IVehicle';
 import { getFilm } from '../../store/actions';
+import Link from '../link/link.component';
+
+//CSS styles
+import './vehicle.component.css';
 
 type props = {
   vehicle: IVehicle;
@@ -37,10 +41,10 @@ const Vehicle: React.FC<props> = ({ vehicle, getFilm }) => {
         <p>Consumable: {vehicle.consumables}</p>
         <p>Vehicle Class: {vehicle.vehicle_class}</p>
       </div>
-      <div>
+      <div className='vehicle-grid'>
         {vehicle.films.map((film, index) => (
           <p key={index} onClick={() => handleSelectedFilm(film)}>
-            Film {index + 1}
+            <Link title={`Film ${index + 1}`} linkType='primary-link' />
           </p>
         ))}
       </div>

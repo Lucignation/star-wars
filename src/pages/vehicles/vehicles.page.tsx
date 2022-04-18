@@ -9,6 +9,9 @@ import Search from '../../components/search/search.component';
 import { Store } from '../../store/types';
 import Spinner from '../../utils/Spinner/Spinner';
 
+//CSS styles
+import './vehicles.page.css';
+
 type props = {
   getVehicles: any;
   isLoading: boolean;
@@ -39,7 +42,7 @@ const Vehicles: React.FC<props> = ({ getVehicles, isLoading }) => {
       ) : (
         <div>
           <Search search={search} setSearch={setSearch} />
-          <div className='people-container'>
+          <div className='vehicles-container'>
             {filterVehicle.length === 0 ? (
               <p>No search matched.</p>
             ) : (

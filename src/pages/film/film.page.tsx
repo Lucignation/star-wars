@@ -3,10 +3,12 @@ import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
+//import from folders
 import { Store } from '../../store/types';
 import { IFilm } from '../../common/interfaces/IFilm';
 import { getPlanet } from '../../store/actions';
 import Spinner from '../../utils/Spinner/Spinner';
+import Button from '../../components/button/button.component';
 
 type props = {
   film: IFilm;
@@ -32,7 +34,9 @@ const Film: React.FC<props> = ({ film, getPlanet, isLoading }) => {
         <Spinner />
       ) : (
         <div>
-          <button onClick={() => handleBackBtn()}>Back</button>
+          <div onClick={() => handleBackBtn()}>
+            <Button title='Back' />
+          </div>
           <h2>Title: {film?.title}</h2>
           <p>Director: {film?.director}</p>
           <p>
