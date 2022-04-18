@@ -20,6 +20,8 @@ import './home.page.css';
 type myProps = {
   setPeople: any;
   setFilms: any;
+  getPeople: any;
+  getFilms: any;
   isLoading: boolean;
   films: Array<IFilm>;
   favorite: boolean;
@@ -31,16 +33,18 @@ const Home: React.FC<myProps> = ({
   setPeople,
   setFilms,
   isLoading,
+  getPeople,
+  getFilms,
   films,
   favorite,
 }) => {
   useEffect(() => {
     const fetch = async () => {
-      const res = await getPeople();
-      const data = await getFilms();
-      console.log(data);
-      setPeople(res);
-      setFilms(data);
+      await getPeople();
+      await getFilms();
+      // console.log(data);
+      // setPeople(res);
+      // setFilms(data);
     };
 
     fetch();
@@ -74,8 +78,8 @@ const mapPropsToState = (state: Store) => ({
 });
 
 export default connect(mapPropsToState, {
-  getPeople: getPeople,
-  setPeople: setPeople,
+  getPeople,
+  setPeople,
   getFilms,
   setFilms,
 })(Home);

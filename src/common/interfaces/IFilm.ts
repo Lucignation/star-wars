@@ -1,4 +1,7 @@
+import { IPeople } from './IPeople';
 import { IPlanet } from './IPlanet';
+import { IStarship } from './IStarship';
+import { IVehicle } from './IVehicle';
 
 export interface IFilm {
   title: string;
@@ -7,10 +10,10 @@ export interface IFilm {
   director: string;
   producer: string;
   release_date: string;
-  characters: string[];
-  planets: IPlanet[];
-  starships: string[];
-  vehicles: string[];
+  characters: IPeople[];
+  planets: string[];
+  starships: IStarship[];
+  vehicles: IVehicle[];
   species: string[];
   created: string;
   edited: string;

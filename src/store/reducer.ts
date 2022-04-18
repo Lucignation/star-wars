@@ -2,7 +2,16 @@ import { combineReducers } from 'redux';
 
 import { IFilm } from '../common/interfaces/IFilm';
 import { IPeople } from '../common/interfaces/IPeople';
-import { SET_FILMS, SET_PEOPLE, ActionTypes, APP_STATE } from './actions';
+import {
+  SET_FILMS,
+  SET_FILM,
+  SET_PEOPLE,
+  ActionTypes,
+  APP_STATE,
+  SET_PLANETS,
+  SET_PLANET,
+  SET_VEHICLES,
+} from './actions';
 import { Store } from './types';
 
 const initialState: Store = {
@@ -44,6 +53,63 @@ const initialState: Store = {
   },
   favorite: false,
   isLoading: false,
+  vehicles: [],
+  planets: [],
+  starships: [],
+  vehicle: {
+    name: '',
+    model: '',
+    manufacturer: '',
+    cost_in_credits: '',
+    length: '',
+    max_atmosphering_speed: '',
+    crew: '',
+    passengers: '',
+    cargo_capacity: '',
+    consumables: '',
+    vehicle_class: '',
+    pilots: [],
+    films: [],
+    created: '',
+    edited: '',
+    url: '',
+  },
+  planet: {
+    name: '',
+    rotation_period: '',
+    orbital_period: '',
+    diameter: '',
+    climate: '',
+    gravity: '',
+    terrain: '',
+    surface_water: '',
+    population: '',
+    residents: [],
+    films: [],
+    created: '',
+    edited: '',
+    url: '',
+  },
+  starship: {
+    name: '',
+    model: '',
+    manufacturer: '',
+    cost_in_credits: '',
+    length: '',
+    max_atmosphering_speed: '',
+    crew: '',
+    passengers: '',
+    cargo_capacity: '',
+    consumables: '',
+    hyperdrive_rating: '',
+    MGLT: '',
+    starship_class: '',
+    pilots: [],
+    films: [],
+    created: '',
+    edited: '',
+    url: '',
+  },
 };
 
 function resourcesReducer(state: Store = initialState, action: ActionTypes) {
@@ -59,6 +125,24 @@ function resourcesReducer(state: Store = initialState, action: ActionTypes) {
       return {
         ...state,
         films: action.payload,
+      };
+
+    case SET_FILM:
+      return {
+        ...state,
+        film: action.payload,
+      };
+
+    case SET_PLANET:
+      return {
+        ...state,
+        planet: action.payload,
+      };
+
+    case SET_VEHICLES:
+      return {
+        ...state,
+        vehicles: action.payload,
       };
 
     case APP_STATE:

@@ -7,6 +7,9 @@ import Header from '../header/header.component';
 import Footer from '../footer/footer.component';
 import People from '../../pages/people/people.page';
 import Films from '../../pages/films/films.page';
+import Vehicles from '../../pages/vehicles/vehicles.page';
+import Film from '../../pages/film/film.page';
+import Planet from '../../pages/planet/planet.page';
 
 //CSS styling
 import './app.component.css';
@@ -21,6 +24,9 @@ const App: React.FC = () => {
           <Route path='/' element={<Home />} />
           <Route path='/people' element={<People />} />
           <Route path='/films' element={<Films />} />
+          <Route path='/films/:id' element={<Film />} />
+          <Route path='/vehicles' element={<Vehicles />} />
+          <Route path='/planets/:id' element={<Planet />} />
         </Routes>
         <Footer />
       </Router>

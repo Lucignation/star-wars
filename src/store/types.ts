@@ -1,5 +1,8 @@
 import { IPeople } from '../common/interfaces/IPeople';
 import { IFilm } from '../common/interfaces/IFilm';
+import { IVehicle } from '../common/interfaces/IVehicle';
+import { IPlanet } from '../common/interfaces/IPlanet';
+import { IStarship } from '../common/interfaces/IStarship';
 
 export type Store = {
   resources?: any;
@@ -9,4 +12,14 @@ export type Store = {
   film: IFilm;
   isLoading: boolean;
   favorite?: boolean;
+  vehicles: Array<IVehicle>;
+  vehicle: IVehicle;
+  planets: Array<IPlanet>;
+  planet: IPlanet;
+  starships: Array<IStarship>;
+  starship: IStarship;
+};
+
+export type Error = {
+  detail: string;
 };

@@ -1,4 +1,5 @@
 import { IFilm } from './IFilm';
+import { IPeople } from './IPeople';
 
 export interface IPlanet {
   name: string;
@@ -10,8 +11,8 @@ export interface IPlanet {
   terrain: string;
   surface_water: string;
   population: string;
-  residents: string[];
-  films: string[] | IFilm[];
+  residents: IPeople[];
+  films: string[];
   created: string;
   edited: string;
   url: string;

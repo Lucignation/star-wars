@@ -6,9 +6,9 @@ import './navbar.component.css';
 
 const Navbar: React.FC = () => {
   const location = useLocation();
-  let match = useMatch('/');
+  let filmMatch = useMatch('/films/:id');
   console.log(location);
-  console.log(match);
+  console.log(filmMatch);
   return (
     <nav className='navbar'>
       <NavLink
@@ -25,7 +25,12 @@ const Navbar: React.FC = () => {
       </NavLink>
       <NavLink
         to='/films'
-        className={location.pathname === '/films' ? 'active-navbar' : ''}
+        className={
+          location.pathname === '/films' ||
+          location.pathname === filmMatch?.pathname
+            ? 'active-navbar'
+            : ''
+        }
       >
         Films
       </NavLink>
