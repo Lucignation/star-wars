@@ -6,3 +6,12 @@
   padding-top: 0px;
   border-bottom: 2px solid #0097d338;
 }
+
+.logo {
+  text-decoration: none;
+  font-size: 20px;
+  font-family: 'Krona One', sans-serif;
+  color: #0097d3ce;
+  margin-top: 9px;
+  margin-left: 19px;
+}

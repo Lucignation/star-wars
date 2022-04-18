@@ -7,7 +7,9 @@ import './header.component.css';
 const Header: React.FC = () => {
   return (
     <header className='header'>
-      <a href='/'>Logo</a>
+      <a href='/' className='logo'>
+        STAR WARS
+      </a>
       <Navbar />
     </header>
   );

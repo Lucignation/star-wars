@@ -7,4 +7,12 @@
 .card {
   padding: 6% 12%;
   box-shadow: 0px 4px 35px 0px #a8acb030;
+  border-radius: 4px;
+}
+
+.half {
+  display: grid;
+  grid-template-columns: 50% 50%;
+  grid-gap: 2%;
+  border-bottom: 1px solid #a8acb030;
 }

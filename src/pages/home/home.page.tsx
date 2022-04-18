@@ -1,4 +1,4 @@
-import React, { useEffect, Suspense, useState } from 'react';
+import React, { useEffect, Suspense, useState, useCallback } from 'react';
 import { connect } from 'react-redux';
 import { motion } from 'framer-motion';
 
@@ -51,12 +51,19 @@ const Home: React.FC<myProps> = ({
     };
 
     fetch();
+
+    //cleanup
+    return () => {
+      setPeople([]);
+      setFilms([]);
+    };
   }, []);
+
   console.log(favorite);
   return (
     <div className='home'>
       <div className='home-container container-layout'>
-        {isLoading ? (
+        {isLoading || people.length <= 0 ? (
           <Spinner />
         ) : (
           <motion.div
@@ -70,7 +77,7 @@ const Home: React.FC<myProps> = ({
         )}
         <div>
           <h2>Films</h2>
-          {isLoading ? (
+          {isLoading && films.length < 0 ? (
             <Spinner />
           ) : (
             films.map((film, index) => (

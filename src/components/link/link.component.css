@@ -1,0 +1,21 @@
+.primary-link p {
+  border: 1px solid #0097d3ce;
+  color: #fff;
+  background-color: #0097d3ce;
+  text-align: center;
+  margin-left: 5px;
+  padding: 4px 9px;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.secondeary-link p {
+  border: 1px solid #004ad3ce;
+  color: #fff;
+  background-color: #004ad3ce;
+  text-align: center;
+  margin-left: 5px;
+  padding: 4px 9px;
+  border-radius: 4px;
+  cursor: pointer;
+}

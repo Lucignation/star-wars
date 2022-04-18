@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { IFilm } from '../../common/interfaces/IFilm';
 import { IPlanet } from '../../common/interfaces/IPlanet';
 import { getPlanet } from '../../store/actions';
+import Link from '../link/link.component';
 
 //CSS styles
 import './film.component.css';
@@ -32,9 +33,9 @@ const Film: React.FC<props> = ({ film, getPlanet }) => {
       <p>Release Date: {film.release_date}</p>
       <div className='film-planet-grid'>
         {film.planets.map((planet, index) => (
-          <p key={index} onClick={() => planetSelected(planet, index)}>
-            Planet {index + 1}
-          </p>
+          <div key={index} onClick={() => planetSelected(planet, index)}>
+            <Link title={`Planet ${index + 1}`} />
+          </div>
         ))}
       </div>
     </div>

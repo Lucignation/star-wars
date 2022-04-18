@@ -22,7 +22,7 @@ const Vehicle: React.FC<props> = ({ vehicle, getFilm }) => {
     navigate(`/films/${res.title}`); // navigate to /films/film-title
   };
   return (
-    <div>
+    <div className='card film-card'>
       <h3>Name: {vehicle.name}</h3>
       <h4>Model: {vehicle.model}</h4>
       <h4>Manufacturer: {vehicle.manufacturer}</h4>
