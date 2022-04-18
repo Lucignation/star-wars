@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getVehicles } from '../../store/actions';
 import Vehicle from '../../components/vehicle/vehicle.component';
 import { IVehicle } from '../../common/interfaces/IVehicle';
+import Search from '../../components/search/search.component';
 
 type props = {
   getVehicles: any;
@@ -12,6 +13,8 @@ type props = {
 
 const Vehicles: React.FC<props> = ({ getVehicles }) => {
   const [_vehicles, setVehicles] = useState<IVehicle[]>([]);
+  const [search, setSearch] = useState<string>('');
+
   useEffect(() => {
     const fetch = async () => {
       const res = await getVehicles();
@@ -22,11 +25,16 @@ const Vehicles: React.FC<props> = ({ getVehicles }) => {
 
   console.log(_vehicles);
 
+  let filterVehicle = _vehicles.filter(({ name }) => {
+    return name.toLowerCase().indexOf(search.toLowerCase()) >= 0;
+  });
+
   return (
     <div>
-      {_vehicles.map((vehicle, index) => (
-          <Vehicle key={index} vehicle={vehicle} />
-        ))}
+      <Search search={search} setSearch={setSearch} />
+      {filterVehicle.map((vehicle, index) => (
+        <Vehicle key={index} vehicle={vehicle} />
+      ))}
     </div>
   );
 };

@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { connect } from 'react-redux';
 import { IFilm } from '../../common/interfaces/IFilm';
 
 //importing files
 import Film from '../../components/film/film.component';
 import { Store } from '../../store/types';
+import Search from '../../components/search/search.component';
 
 //CSS styles
 import './films.page.css';
@@ -15,11 +16,18 @@ type props = {
 };
 
 const Films: React.FC<props> = ({ isLoading, films }) => {
+  const [search, setSearch] = useState<string>('');
+  let filterFilms = films.filter(({ title }) => {
+    return title.toLowerCase().indexOf(search.toLowerCase()) >= 0;
+  });
   return (
-    <div className='film-container'>
-      {films.map((film, index) => (
-        <Film key={index} film={film} />
-      ))}
+    <div>
+      <Search search={search} setSearch={setSearch} />
+      <div className='film-container'>
+        {filterFilms.map((film, index) => (
+          <Film key={index} film={film} />
+        ))}
+      </div>
     </div>
   );
 };
