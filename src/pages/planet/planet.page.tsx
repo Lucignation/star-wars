@@ -9,6 +9,9 @@ import { IPlanet } from '../../common/interfaces/IPlanet';
 import { getFilm } from '../../store/actions';
 import Button from '../../components/button/button.component';
 
+//CSS styles
+import './planet.page.css';
+
 type props = {
   planet: IPlanet;
   getFilm: any;
@@ -29,7 +32,7 @@ const Planet: React.FC<props> = ({ planet, getFilm }) => {
     navigate(`/films/${res.title}`);
   };
   return (
-    <div>
+    <div className='planet-page-container'>
       <div onClick={() => handleBackBtn()}>
         <Button title='Back' />
       </div>

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
@@ -6,7 +6,7 @@ import moment from 'moment';
 //import from folders
 import { Store } from '../../store/types';
 import { IFilm } from '../../common/interfaces/IFilm';
-import { getPlanet } from '../../store/actions';
+import { getFilms, getPlanet } from '../../store/actions';
 import Spinner from '../../utils/Spinner/Spinner';
 import Button from '../../components/button/button.component';
 
@@ -14,9 +14,12 @@ type props = {
   film: IFilm;
   getPlanet: any;
   isLoading: boolean;
+  getFilms: any;
 };
-const Film: React.FC<props> = ({ film, getPlanet, isLoading }) => {
+const Film: React.FC<props> = ({ film, getPlanet, isLoading, getFilms }) => {
   const navigate = useNavigate();
+
+  
 
   const handleBackBtn = () => {
     navigate(-1);
@@ -75,4 +78,4 @@ const mapPropsToState = (state: Store) => ({
   favorite: state.resources.favorite,
 });
 
-export default connect(mapPropsToState, { getPlanet })(Film);
+export default connect(mapPropsToState, { getPlanet, getFilms })(Film);

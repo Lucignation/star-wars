@@ -11,6 +11,7 @@ import {
   SET_PLANETS,
   SET_PLANET,
   SET_VEHICLES,
+  SET_FAVORITE,
 } from './actions';
 import { Store } from './types';
 
@@ -110,6 +111,11 @@ const initialState: Store = {
     edited: '',
     url: '',
   },
+  favoriteList: [],
+  filmFav: false,
+  peopleFav: false,
+  planetFav: false,
+  vehicleFav: false,
 };
 
 function resourcesReducer(state: Store = initialState, action: ActionTypes) {
@@ -147,6 +153,12 @@ function resourcesReducer(state: Store = initialState, action: ActionTypes) {
         ...state,
         vehicles: action.payload,
         isLoading: false,
+      };
+
+    case SET_FAVORITE:
+      return {
+        ...state,
+        favorite: action.payload,
       };
 
     case APP_STATE:

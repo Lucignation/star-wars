@@ -16,3 +16,8 @@
   grid-gap: 2%;
   border-bottom: 1px solid #a8acb030;
 }
+
+.title-halves {
+  display: grid;
+  grid-template-columns: 85% 15%;
+}

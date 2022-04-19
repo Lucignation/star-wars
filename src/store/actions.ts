@@ -1,4 +1,5 @@
 import axios from 'axios';
+import { Dispatch } from 'redux';
 
 import { Error } from './types';
 
@@ -16,6 +17,7 @@ export const APP_STATE = 'APP_STATE';
 export const SET_PLANETS = 'SET_PLANETS';
 export const SET_VEHICLES = 'SET_VEHICLES';
 export const SET_STARSHIPS = 'SET_STARSHIPS';
+export const SET_FAVORITE = 'SET_FAVORITE';
 
 export type ActionTypes =
   | { type: typeof SET_PEOPLE; payload: IPeople[] }
@@ -25,25 +27,28 @@ export type ActionTypes =
   | { type: typeof SET_PLANETS; payload: IPlanet[] }
   | { type: typeof SET_PLANET; payload: IPlanet }
   | { type: typeof SET_VEHICLES; payload: IVehicle[] }
-  | { type: typeof SET_STARSHIPS; payload: IStarship[] };
+  | { type: typeof SET_STARSHIPS; payload: IStarship[] }
+  | { type: typeof SET_FAVORITE; payload: boolean };
 
 //get request to people endpoint
-export const getPeople = () => async (dispatch: any) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      dispatch(setLoading());
-      const url = 'https://' + process.env.REACT_APP_PEOPLE;
-      const people = await axios.get(url);
-      dispatch({
-        type: SET_PEOPLE,
-        payload: people.data.results,
-      });
-      resolve(people.data.results);
-    } catch (error) {
-      reject(error);
-    }
-  });
-};
+export const getPeople =
+  () =>
+  async (dispatch: Dispatch): Promise<IPeople> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        dispatch(setLoading());
+        const url = 'https://' + process.env.REACT_APP_PEOPLE;
+        const people = await axios.get(url);
+        dispatch({
+          type: SET_PEOPLE,
+          payload: people.data.results,
+        });
+        resolve(people.data.results);
+      } catch (error) {
+        reject(error);
+      }
+    });
+  };
 
 //updating the store for people
 export const setPeople = (people: IPeople[]): ActionTypes => ({
@@ -58,7 +63,7 @@ export const setFilms = (films: IFilm[]): ActionTypes => ({
 });
 
 //get request to films endpoint
-export const getFilms = () => async (dispatch: any) => {
+export const getFilms = () => async (dispatch: Dispatch) => {
   return new Promise(async (resolve, reject) => {
     try {
       dispatch(setLoading());
@@ -82,7 +87,7 @@ export const setLoading = (): ActionTypes => ({
 });
 
 //get request to vehicles endpoint
-export const getVehicles = () => async (dispatch: any) => {
+export const getVehicles = () => async (dispatch: Dispatch) => {
   return new Promise(async (resolve, reject) => {
     try {
       dispatch(setLoading());
@@ -99,7 +104,7 @@ export const getVehicles = () => async (dispatch: any) => {
 };
 
 //get request to film endpoint
-export const getFilm = (id: number) => async (dispatch: any) => {
+export const getFilm = (id: number) => async (dispatch: Dispatch) => {
   return new Promise(async (resolve, reject) => {
     try {
       dispatch(setLoading());
@@ -119,17 +124,26 @@ export const getFilm = (id: number) => async (dispatch: any) => {
 };
 
 //get request to planet endpoint
-export const getPlanet = (id: number) => async (dispatch: any) => {
-  return new Promise(async (resolve, reject) => {
-    try {
-      dispatch(setLoading());
-      const url = `https://${process.env.REACT_APP_PLANETS}/${id}`;
-      const planet = await axios.get(url);
-      resolve(planet.data);
-      dispatch({ type: SET_PLANET, payload: planet.data });
-    } catch (error: any) {
-      console.log(error);
-      reject({ error: error });
-    }
+export const getPlanet =
+  (id: number) =>
+  async (dispatch: Dispatch): Promise<IPlanet> => {
+    return new Promise(async (resolve, reject) => {
+      try {
+        dispatch(setLoading());
+        const url = `https://${process.env.REACT_APP_PLANETS}/${id}`;
+        const planet = await axios.get(url);
+        resolve(planet.data);
+        dispatch({ type: SET_PLANET, payload: planet.data });
+      } catch (error: any) {
+        console.log(error);
+        reject({ error: error });
+      }
+    });
+  };
+
+//fave a resources
+export const isFavorite = (isFav: boolean) => async (dispatch: Dispatch) => {
+  return new Promise((resolve, reject) => {
+    dispatch({ type: SET_FAVORITE, payload: isFav });
   });
 };

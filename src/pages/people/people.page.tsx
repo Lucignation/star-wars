@@ -1,45 +1,65 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { Store } from '../../store/types';
 
 //import from folders
 import PeopleComponent from '../../components/people/people.component';
 import Search from '../../components/search/search.component';
+import { getPeople, setPeople, getFilms, setFilms } from '../../store/actions';
+import { IPeople } from '../../common/interfaces/IPeople';
 
 //CSS styles
 import './people.page.css';
+import Spinner from '../../utils/Spinner/Spinner';
 
 type myProps = {
-  resources: Store;
+  isLoading: boolean;
+  getPeople: any;
+  allPeople: Array<IPeople>;
 };
 
-const People: React.FC<myProps> = ({ resources }) => {
+const People: React.FC<myProps> = ({ isLoading, getPeople, allPeople }) => {
   const [search, setSearch] = useState('');
-  const { allPeople } = resources;
-  console.log(allPeople);
+  const [people, setPeople] = useState<IPeople[]>([]);
 
-  let filterPeople = allPeople.filter(({ name }) => {
+  useEffect(() => {
+    const fetch = async () => {
+      const peopleRes = await getPeople();
+      setPeople(peopleRes);
+    };
+
+    fetch();
+  }, []);
+
+  let filterPeople = people.filter(({ name }) => {
     return name.toLowerCase().indexOf(search.toLowerCase()) >= 0;
   });
   console.log(filterPeople);
   return (
     <div>
       <Search search={search} setSearch={setSearch} />
-      <div className='people-container'>
-        {filterPeople.length === 0 ? (
-          <p>No search matched. </p>
-        ) : (
-          filterPeople?.map((person, index) => (
-            <PeopleComponent person={person} key={index} />
-          ))
-        )}
-      </div>
+      {isLoading && people.length === 0 ? (
+        <Spinner />
+      ) : people.length === 0 ? (
+        <p>There are no people to show for now.</p>
+      ) : (
+        <div className='people-container'>
+          {filterPeople.length === 0 ? (
+            <p>No search matched. </p>
+          ) : (
+            filterPeople?.map((person, index) => (
+              <PeopleComponent person={person} key={index} />
+            ))
+          )}
+        </div>
+      )}
     </div>
   );
 };
 
 const mapPropsToState = (state: Store) => ({
-  resources: state.resources,
+  isLoading: state.resources.isLoading,
+  allPeople: state.resources.allPeople,
 });
 
-export default connect(mapPropsToState)(People);
+export default connect(mapPropsToState, { getPeople })(People);

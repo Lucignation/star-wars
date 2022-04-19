@@ -42,15 +42,19 @@ const Vehicles: React.FC<props> = ({ getVehicles, isLoading }) => {
       ) : (
         <div>
           <Search search={search} setSearch={setSearch} />
-          <div className='vehicles-container'>
-            {filterVehicle.length === 0 ? (
-              <p>No search matched.</p>
-            ) : (
-              filterVehicle.map((vehicle, index) => (
-                <Vehicle key={index} vehicle={vehicle} />
-              ))
-            )}
-          </div>
+          {_vehicles.length === 0 ? (
+            <p>There are no vehicles to show for now.</p>
+          ) : (
+            <div className='vehicles-container'>
+              {filterVehicle.length === 0 ? (
+                <p>No search matched.</p>
+              ) : (
+                filterVehicle.map((vehicle, index) => (
+                  <Vehicle key={index} vehicle={vehicle} />
+                ))
+              )}
+            </div>
+          )}
         </div>
       )}
     </div>

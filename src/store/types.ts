@@ -11,13 +11,18 @@ export type Store = {
   films: Array<IFilm>;
   film: IFilm;
   isLoading: boolean;
-  favorite?: boolean;
+  favorite: boolean;
   vehicles: Array<IVehicle>;
   vehicle: IVehicle;
   planets: Array<IPlanet>;
   planet: IPlanet;
   starships: Array<IStarship>;
   starship: IStarship;
+  favoriteList: any[];
+  filmFav: boolean;
+  planetFav: boolean;
+  peopleFav: boolean;
+  vehicleFav: boolean;
 };
 
 export type Error = {

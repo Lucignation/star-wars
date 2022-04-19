@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect, useDispatch } from 'react-redux';
+import { motion } from 'framer-motion';
 
 //interfaces
 import { IPeople } from '../../common/interfaces/IPeople';
@@ -29,23 +30,33 @@ const PeopleComponent: React.FC<myProps> = ({ person, getFilm }) => {
   };
   return (
     <div className='card'>
-      <h2>{person.name}</h2>
-      <div className='half'>
-        <h4>Eyes: {person.eye_color}</h4>
-        <h4>Hair: {person.hair_color}</h4>
-      </div>
+      <motion.div
+        initial={{ y: -250 }}
+        animate={{ y: 10 }}
+        exit={{ y: -250 }}
+        transition={{ ease: 'easeOut', duration: 0.3 }}
+      >
+        <div className='title-halves'>
+          <h2>{person.name}</h2>
+          <p>Fav</p>
+        </div>
+        <div className='half'>
+          <h4>Eyes: {person.eye_color}</h4>
+          <h4>Hair: {person.hair_color}</h4>
+        </div>
 
-      <div className='half'>
-        <h4>Height: {person.height}</h4>
-        <h4>Mass: {person.mass}</h4>
-      </div>
-      <div className='people-grid'>
-        {person.films.map((film, index) => (
-          <div key={index} onClick={() => handleSelectedFilm(film)}>
-            <Link title={`Film ${index + 1}`} linkType='primary-link' />
-          </div>
-        ))}
-      </div>
+        <div className='half'>
+          <h4>Height: {person.height}</h4>
+          <h4>Mass: {person.mass}</h4>
+        </div>
+        <div className='people-grid'>
+          {person.films.map((film, index) => (
+            <div key={index} onClick={() => handleSelectedFilm(film)}>
+              <Link title={`Film ${index + 1}`} linkType='primary-link' />
+            </div>
+          ))}
+        </div>
+      </motion.div>
     </div>
   );
 };
