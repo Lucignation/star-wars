@@ -16,7 +16,15 @@
   cursor: pointer;
 }
 
-.fav-icon {
+.fav-icons {
   font-size: 22px;
   color: #0097d3ce;
+}
+
+.fav-icon {
+  cursor: pointer;
+}
+
+.fav-icon-active {
+  transition: all 0.5s ease-in-out;
 }

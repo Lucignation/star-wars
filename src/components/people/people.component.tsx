@@ -1,33 +1,57 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { motion } from 'framer-motion';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 //interfaces
 import { IPeople } from '../../common/interfaces/IPeople';
 
 //import from folders
-import { getFilm } from '../../store/actions';
+import { getFilm, removeFav, isFavorite } from '../../store/actions';
 import Link from '../../components/link/link.component';
 
 //CSS styles
 import './people.component.css';
+import { Store } from '../../store/types';
 
 type myProps = {
   person: IPeople;
   getFilm: any;
+  removeFav: (people: IPeople) => void;
+  resourcses: Store;
+  isFavorite: (fav: boolean) => void;
 };
 
-const PeopleComponent: React.FC<myProps> = ({ person, getFilm }) => {
+const PeopleComponent: React.FC<myProps> = ({
+  person,
+  getFilm,
+  removeFav,
+  resourcses,
+  isFavorite,
+}) => {
   const navigate = useNavigate();
 
-  console.log(person);
+  const { favoriteList } = resourcses;
+
+  //load selected film page
   const handleSelectedFilm = async (film: string) => {
     const filmNum: number = parseInt(film.split('/')[5]); //selected film number
-    console.log(film.split('/')[5]);
     const res = await getFilm(filmNum);
     navigate(`/films/${res.title}`);
   };
+
+  //fav a person
+  const handleFavorite = (person: IPeople) => {
+    if (favoriteList.some((item) => item.name === person.name)) {
+      removeFav(person);
+      isFavorite(false);
+    } else {
+      favoriteList.push(person);
+      isFavorite(true);
+    }
+  };
+
   return (
     <div className='card'>
       <motion.div
@@ -38,7 +62,17 @@ const PeopleComponent: React.FC<myProps> = ({ person, getFilm }) => {
       >
         <div className='title-halves'>
           <h2>{person.name}</h2>
-          <p>Fav</p>
+          <div onClick={() => handleFavorite(person)} className='fav-icons'>
+            {favoriteList.some((item) => item.name === person.name) ? (
+              <div className='fav-icon'>
+                <AiFillHeart />
+              </div>
+            ) : (
+              <div className='fav-icon'>
+                <AiOutlineHeart />
+              </div>
+            )}
+          </div>
         </div>
         <div className='half'>
           <h4>Eyes: {person.eye_color}</h4>
@@ -61,4 +95,12 @@ const PeopleComponent: React.FC<myProps> = ({ person, getFilm }) => {
   );
 };
 
-export default connect(null, { getFilm })(PeopleComponent);
+const mapPropsToState = (state: Store) => ({
+  resourcses: state.resources,
+});
+
+export default connect(mapPropsToState, {
+  getFilm,
+  isFavorite,
+  removeFav,
+})(PeopleComponent);

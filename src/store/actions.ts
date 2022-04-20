@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
 
-import { Error } from './types';
-
 import { IPeople } from '../common/interfaces/IPeople';
 import { IFilm } from '../common/interfaces/IFilm';
 import { IPlanet } from '../common/interfaces/IPlanet';
@@ -19,6 +17,7 @@ export const SET_VEHICLES = 'SET_VEHICLES';
 export const SET_STARSHIPS = 'SET_STARSHIPS';
 export const SET_FAVORITE = 'SET_FAVORITE';
 export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
+export const REMOVE_FILM_FAVORITE = 'REMOVE_FILM_FAVORITE';
 
 export type ActionTypes =
   | { type: typeof SET_PEOPLE; payload: IPeople[] }
@@ -30,7 +29,8 @@ export type ActionTypes =
   | { type: typeof SET_VEHICLES; payload: IVehicle[] }
   | { type: typeof SET_STARSHIPS; payload: IStarship[] }
   | { type: typeof SET_FAVORITE; payload: boolean }
-  | { type: typeof REMOVE_FAVORITE; payload: void };
+  | { type: typeof REMOVE_FAVORITE; payload: void }
+  | { type: typeof REMOVE_FILM_FAVORITE; payload: void };
 
 //get request to people endpoint
 export const getPeople =
@@ -77,7 +77,6 @@ export const getFilms = () => async (dispatch: Dispatch) => {
       });
       resolve(films.data.results);
     } catch (error) {
-      console.error(error);
       reject(error);
     }
   });
@@ -95,11 +94,9 @@ export const getVehicles = () => async (dispatch: Dispatch) => {
       dispatch(setLoading());
       const url = 'https://' + process.env.REACT_APP_VEHICLES;
       const vehicle = await axios.get(url);
-      console.log(vehicle.data.results);
       dispatch({ type: SET_VEHICLES, payload: vehicle.data.results });
       resolve(vehicle.data.results);
     } catch (error) {
-      console.error(error);
       reject(error);
     }
   });
@@ -113,13 +110,11 @@ export const getFilm = (id: number) => async (dispatch: Dispatch) => {
       const url = `https://${process.env.REACT_APP_FILMS}/${id}`;
       const film = await axios.get(url);
       resolve(film.data);
-      console.log(film.data);
       dispatch({
         type: SET_FILM,
         payload: film.data,
       });
     } catch (error: any) {
-      console.error(error.detail);
       reject(error.detail);
     }
   });
@@ -137,17 +132,21 @@ export const getPlanet =
         resolve(planet.data);
         dispatch({ type: SET_PLANET, payload: planet.data });
       } catch (error: any) {
-        console.log(error);
         reject({ error: error });
       }
     });
   };
 
-//remove fav from favorite list
+//remove film fav from favorite list
 export const removeFavorite = (film: IFilm) => (dispatch: Dispatch) => {
-  console.log(film);
-  dispatch({ type: REMOVE_FAVORITE, payload: film.title });
+  dispatch({ type: REMOVE_FILM_FAVORITE, payload: film.title });
 };
+
+//remove people fav from the favorite list
+export const removeFav =
+  (people: IPeople | IVehicle) => (dispatch: Dispatch) => {
+    dispatch({ type: REMOVE_FAVORITE, payload: people.name });
+  };
 
 //fave a resources
 export const isFavorite = (isFav: boolean) => async (dispatch: Dispatch) => {

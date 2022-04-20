@@ -1,18 +1,16 @@
 import { combineReducers } from 'redux';
 
-import { IFilm } from '../common/interfaces/IFilm';
-import { IPeople } from '../common/interfaces/IPeople';
 import {
   SET_FILMS,
   SET_FILM,
   SET_PEOPLE,
   ActionTypes,
   APP_STATE,
-  SET_PLANETS,
   SET_PLANET,
   SET_VEHICLES,
   SET_FAVORITE,
   REMOVE_FAVORITE,
+  REMOVE_FILM_FAVORITE,
 } from './actions';
 import { Store } from './types';
 
@@ -162,12 +160,19 @@ function resourcesReducer(state: Store = initialState, action: ActionTypes) {
         favorite: action.payload,
       };
 
-    case REMOVE_FAVORITE:
-      console.log(action.payload);
+    case REMOVE_FILM_FAVORITE:
       return {
         ...state,
         favoriteList: state.favoriteList.filter(
           (item) => item.title !== action.payload
+        ),
+      };
+
+    case REMOVE_FAVORITE:
+      return {
+        ...state,
+        favoriteList: state.favoriteList.filter(
+          (item) => item.name !== action.payload
         ),
       };
 

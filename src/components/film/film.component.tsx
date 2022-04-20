@@ -1,12 +1,11 @@
-import React, { useEffect, useState } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import React from 'react';
+import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 //import file
 import { IFilm } from '../../common/interfaces/IFilm';
-import { IPlanet } from '../../common/interfaces/IPlanet';
 import { getPlanet, isFavorite, removeFavorite } from '../../store/actions';
 import { Store } from '../../store/types';
 import Link from '../link/link.component';
@@ -29,7 +28,7 @@ const Film: React.FC<props> = ({
   isFavorite,
   removeFavorite,
 }) => {
-  let { favorite, favoriteList, filmFav } = resourcses;
+  let { favoriteList } = resourcses;
   const navigate = useNavigate();
 
   // const [isFav, setIsFav] = useState<boolean>(favorite);
@@ -38,7 +37,6 @@ const Film: React.FC<props> = ({
   const planetSelected = async (planet: string, index: number) => {
     const planetNum: number = parseInt(planet.split('/')[5]);
     const res = await getPlanet(planetNum);
-    console.log(res.name);
     navigate(`/planets/${res.name}`);
   };
 
@@ -63,11 +61,15 @@ const Film: React.FC<props> = ({
       >
         <div className='title-halves'>
           <h3>Title: {film.title}</h3>
-          <div onClick={() => handleFavorite(film)} className='fav-icon'>
+          <div onClick={() => handleFavorite(film)} className='fav-icons'>
             {favoriteList.some((item) => item.title === film.title) ? (
-              <AiFillHeart />
+              <div className='fav-icon'>
+                <AiFillHeart />
+              </div>
             ) : (
-              <AiOutlineHeart />
+              <div className='fav-icon'>
+                <AiOutlineHeart />
+              </div>
             )}
           </div>
         </div>

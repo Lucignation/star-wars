@@ -28,7 +28,6 @@ const Planet: React.FC<props> = ({ planet, getFilm }) => {
   const handleSelectedFilm = async (film: string) => {
     const filmNum: number = parseInt(film.split('/')[5]); //film number /films/4
     const res = await getFilm(filmNum);
-    console.log(res.title);
     navigate(`/films/${res.title}`);
   };
   return (

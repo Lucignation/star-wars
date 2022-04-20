@@ -1,25 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
 //import from folders
 import { Store } from '../../store/types';
-import { IFilm } from '../../common/interfaces/IFilm';
-import { getFilms, getPlanet } from '../../store/actions';
+import { getPlanet } from '../../store/actions';
 import Spinner from '../../utils/Spinner/Spinner';
 import Button from '../../components/button/button.component';
 
 type props = {
-  film: IFilm;
   getPlanet: any;
-  isLoading: boolean;
-  getFilms: any;
+  resources: Store;
 };
-const Film: React.FC<props> = ({ film, getPlanet, isLoading, getFilms }) => {
+const Film: React.FC<props> = ({ getPlanet, resources }) => {
   const navigate = useNavigate();
 
-  
+  const { film, isLoading } = resources;
 
   const handleBackBtn = () => {
     navigate(-1);
@@ -28,7 +25,6 @@ const Film: React.FC<props> = ({ film, getPlanet, isLoading, getFilms }) => {
   const handleSelectedPlanet = async (planet: string) => {
     const planetNum: number = parseInt(planet.split('/')[5]); //planet number /planet/3
     const res = await getPlanet(planetNum);
-    console.log(res.name);
     navigate(`/planets/${res.name}`);
   };
   return (
@@ -73,9 +69,8 @@ const Film: React.FC<props> = ({ film, getPlanet, isLoading, getFilms }) => {
 };
 
 const mapPropsToState = (state: Store) => ({
-  isLoading: state.resources.isLoading,
-  film: state.resources.film,
+  resources: state.resources,
   favorite: state.resources.favorite,
 });
 
-export default connect(mapPropsToState, { getPlanet, getFilms })(Film);
+export default connect(mapPropsToState, { getPlanet })(Film);

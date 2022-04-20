@@ -43,14 +43,7 @@ const Films: React.FC<props> = ({
     return () => {
       setFilms([]);
     };
-  }, []);
-
-  const handleFilmFaved = (film: IFilm, index: number) => {
-    if (films.indexOf(film) === index) {
-      isFavorite(!isFav);
-    }
-    console.log(film, index);
-  };
+  }, [getFilms]);
 
   let filterFilms = films.filter(({ title }) => {
     return title.toLowerCase().indexOf(search.toLowerCase()) >= 0;

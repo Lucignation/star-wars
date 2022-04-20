@@ -1,38 +1,25 @@
-import React, { useEffect, Suspense, useState, useCallback } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { motion } from 'framer-motion';
 
 //Interfaces
-import { IPeople } from '../../common/interfaces/IPeople';
 import { IFilm } from '../../common/interfaces/IFilm';
 
 //redux actions
-import { getPeople, setPeople, getFilms, setFilms } from '../../store/actions';
+import { getPeople, getFilms } from '../../store/actions';
 import { Store } from '../../store/types';
 
 //import from file
 import People from '../people/people.page';
-import Search from '../../components/search/search.component';
-import Film from '../../components/film/film.component';
-import SideAttribute from '../../HOC/SideAttribute/SideAttribute';
 import Spinner from '../../utils/Spinner/Spinner';
 
 //CSS styles
 import './home.page.css';
 
 type myProps = {
-  getPeople: () => any;
   getFilms: any;
-  isLoading: boolean;
-  favorite: boolean;
 };
 
-const Home: React.FC<myProps> = ({
-  isLoading,
-  getPeople,
-  getFilms,
-  favorite,
-}) => {
+const Home: React.FC<myProps> = ({ getFilms }) => {
   const [films, setFilms] = useState<IFilm[]>([]);
 
   useEffect(() => {
@@ -47,7 +34,7 @@ const Home: React.FC<myProps> = ({
     return () => {
       setFilms([]);
     };
-  }, []);
+  }, [getFilms]);
 
   return (
     <div className='home'>
@@ -71,8 +58,6 @@ const Home: React.FC<myProps> = ({
     </div>
   );
 };
-
-// console.log(isLoading);
 
 const mapPropsToState = (state: Store) => ({
   isLoading: state.resources.isLoading,

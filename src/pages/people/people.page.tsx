@@ -5,7 +5,7 @@ import { Store } from '../../store/types';
 //import from folders
 import PeopleComponent from '../../components/people/people.component';
 import Search from '../../components/search/search.component';
-import { getPeople, setPeople, getFilms, setFilms } from '../../store/actions';
+import { getPeople } from '../../store/actions';
 import { IPeople } from '../../common/interfaces/IPeople';
 
 //CSS styles
@@ -15,10 +15,9 @@ import Spinner from '../../utils/Spinner/Spinner';
 type myProps = {
   isLoading: boolean;
   getPeople: any;
-  allPeople: Array<IPeople>;
 };
 
-const People: React.FC<myProps> = ({ isLoading, getPeople, allPeople }) => {
+const People: React.FC<myProps> = ({ isLoading, getPeople }) => {
   const [search, setSearch] = useState('');
   const [people, setPeople] = useState<IPeople[]>([]);
 
@@ -29,12 +28,13 @@ const People: React.FC<myProps> = ({ isLoading, getPeople, allPeople }) => {
     };
 
     fetch();
-  }, []);
+  }, [getPeople]);
 
+  //filter people
   let filterPeople = people.filter(({ name }) => {
     return name.toLowerCase().indexOf(search.toLowerCase()) >= 0;
   });
-  console.log(filterPeople);
+
   return (
     <div>
       <Search search={search} setSearch={setSearch} />

@@ -27,9 +27,7 @@ const Vehicles: React.FC<props> = ({ getVehicles, isLoading }) => {
       setVehicles(res);
     };
     fetch();
-  }, []);
-
-  console.log(_vehicles);
+  }, [getVehicles]);
 
   let filterVehicle = _vehicles.filter(({ name }) => {
     return name.toLowerCase().indexOf(search.toLowerCase()) >= 0;
