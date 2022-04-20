@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
+import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 //import file
 import { IFilm } from '../../common/interfaces/IFilm';
@@ -45,15 +46,14 @@ const Film: React.FC<props> = ({
   const handleFavorite = (film: IFilm) => {
     if (favoriteList.includes(film)) {
       removeFavorite(film);
-      isFavorite(!favorite);
-      // favorite = isFav;
+      isFavorite(false);
     } else {
       favoriteList.push(film);
-      isFavorite(!favorite);
-      // favorite = isFav;
+      isFavorite(true);
     }
   };
   console.log(favoriteList);
+  console.log(favorite);
   // console.log(favorite);
   // console.log(isFav);
   return (
@@ -66,8 +66,8 @@ const Film: React.FC<props> = ({
       >
         <div className='title-halves'>
           <h3>Title: {film.title}</h3>
-          <div onClick={() => handleFavorite(film)}>
-            {favorite ? <p>Faved</p> : <p>Fav</p>}
+          <div onClick={() => handleFavorite(film)} className='fav-icon'>
+            {favoriteList.includes(film) ? <AiFillHeart /> : <AiOutlineHeart />}
           </div>
         </div>
         <p>Director: {film.director}</p>

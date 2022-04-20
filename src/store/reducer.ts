@@ -163,6 +163,7 @@ function resourcesReducer(state: Store = initialState, action: ActionTypes) {
       };
 
     case REMOVE_FAVORITE:
+      console.log(action.payload);
       return {
         ...state,
         favoriteList: state.favoriteList.filter(

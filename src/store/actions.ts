@@ -145,6 +145,7 @@ export const getPlanet =
 
 //remove fav from favorite list
 export const removeFavorite = (film: IFilm) => (dispatch: Dispatch) => {
+  console.log(film);
   dispatch({ type: REMOVE_FAVORITE, payload: film.title });
 };
 
