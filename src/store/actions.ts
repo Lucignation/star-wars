@@ -18,6 +18,7 @@ export const SET_PLANETS = 'SET_PLANETS';
 export const SET_VEHICLES = 'SET_VEHICLES';
 export const SET_STARSHIPS = 'SET_STARSHIPS';
 export const SET_FAVORITE = 'SET_FAVORITE';
+export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
 
 export type ActionTypes =
   | { type: typeof SET_PEOPLE; payload: IPeople[] }
@@ -28,7 +29,8 @@ export type ActionTypes =
   | { type: typeof SET_PLANET; payload: IPlanet }
   | { type: typeof SET_VEHICLES; payload: IVehicle[] }
   | { type: typeof SET_STARSHIPS; payload: IStarship[] }
-  | { type: typeof SET_FAVORITE; payload: boolean };
+  | { type: typeof SET_FAVORITE; payload: boolean }
+  | { type: typeof REMOVE_FAVORITE; payload: void };
 
 //get request to people endpoint
 export const getPeople =
@@ -140,6 +142,11 @@ export const getPlanet =
       }
     });
   };
+
+//remove fav from favorite list
+export const removeFavorite = (film: IFilm) => (dispatch: Dispatch) => {
+  dispatch({ type: REMOVE_FAVORITE, payload: film.title });
+};
 
 //fave a resources
 export const isFavorite = (isFav: boolean) => async (dispatch: Dispatch) => {

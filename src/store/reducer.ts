@@ -12,6 +12,7 @@ import {
   SET_PLANET,
   SET_VEHICLES,
   SET_FAVORITE,
+  REMOVE_FAVORITE,
 } from './actions';
 import { Store } from './types';
 
@@ -159,6 +160,14 @@ function resourcesReducer(state: Store = initialState, action: ActionTypes) {
       return {
         ...state,
         favorite: action.payload,
+      };
+
+    case REMOVE_FAVORITE:
+      return {
+        ...state,
+        favoriteList: state.favoriteList.filter(
+          (item) => item.title !== action.payload
+        ),
       };
 
     case APP_STATE:

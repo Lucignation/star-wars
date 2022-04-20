@@ -6,7 +6,7 @@ import { motion } from 'framer-motion';
 //import file
 import { IFilm } from '../../common/interfaces/IFilm';
 import { IPlanet } from '../../common/interfaces/IPlanet';
-import { getPlanet, isFavorite } from '../../store/actions';
+import { getPlanet, isFavorite, removeFavorite } from '../../store/actions';
 import { Store } from '../../store/types';
 import Link from '../link/link.component';
 
@@ -18,8 +18,7 @@ type props = {
   film: IFilm;
   getPlanet: any;
   isFavorite: (fav: boolean) => void;
-  _film: IFilm;
-  ind: number;
+  removeFavorite: (film: IFilm) => void;
 };
 
 const Film: React.FC<props> = ({
@@ -27,8 +26,7 @@ const Film: React.FC<props> = ({
   film,
   getPlanet,
   isFavorite,
-  _film,
-  ind,
+  removeFavorite,
 }) => {
   let { favorite, favoriteList, filmFav } = resourcses;
   const navigate = useNavigate();
@@ -45,15 +43,12 @@ const Film: React.FC<props> = ({
 
   //fav a film
   const handleFavorite = (film: IFilm) => {
-    // favoriteList.filter((item) => console.log(item.id, ind));
-    const isYe = favoriteList.includes(ind);
-    console.log(isYe);
-    if (favoriteList.includes(ind)) {
-      favoriteList.filter((item) => item.id !== ind);
+    if (favoriteList.includes(film)) {
+      removeFavorite(film);
       isFavorite(!favorite);
       // favorite = isFav;
     } else {
-      favoriteList.push({ id: ind });
+      favoriteList.push(film);
       isFavorite(!favorite);
       // favorite = isFav;
     }
@@ -97,4 +92,8 @@ const mapPropsToState = (state: Store) => ({
   isFilmFav: state.resources.filmFav,
 });
 
-export default connect(mapPropsToState, { getPlanet, isFavorite })(Film);
+export default connect(mapPropsToState, {
+  getPlanet,
+  isFavorite,
+  removeFavorite,
+})(Film);

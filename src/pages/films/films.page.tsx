@@ -68,11 +68,7 @@ const Films: React.FC<props> = ({
           {filterFilms.length === 0 ? (
             <p>No search matched. </p>
           ) : (
-            filterFilms.map((film, index) => (
-              <div key={index} onClick={() => handleFilmFaved(film, index)}>
-                <Film film={film} _film={film} ind={index} />
-              </div>
-            ))
+            filterFilms.map((film, index) => <Film key={index} film={film} />)
           )}
         </div>
       )}
