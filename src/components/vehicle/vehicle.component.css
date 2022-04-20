@@ -2,3 +2,10 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
+
+@media (max-width: 912px) {
+  .vehicle-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

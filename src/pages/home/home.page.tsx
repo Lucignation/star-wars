@@ -17,6 +17,7 @@ import Film from '../../components/film/film.component';
 import SideAttribute from '../../HOC/SideAttribute/SideAttribute';
 import Spinner from '../../utils/Spinner/Spinner';
 
+//CSS styles
 import './home.page.css';
 
 type myProps = {
@@ -52,7 +53,7 @@ const Home: React.FC<myProps> = ({
     <div className='home'>
       <div className='home-container container-layout'>
         <People />
-        <div>
+        <div className='home-film-sidebar'>
           <h2>Quick Films</h2>
           {films.length <= 0 ? (
             <Spinner />

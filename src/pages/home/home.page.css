@@ -7,3 +7,23 @@
 .home-container {
   height: 100%;
 }
+
+@media (max-width: 912px) {
+  .home {
+    padding: 1% 0%;
+    padding-right: 2%;
+  }
+}
+
+@media (max-width: 540px) {
+  .home-film-sidebar {
+    margin-top: 34rem !important;
+    background: #cecece1c;
+    display: block;
+    margin-bottom: 14rem !important;
+  }
+
+  .home-film-sidebar h2 {
+    margin-left: 10% !important;
+  }
+}

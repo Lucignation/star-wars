@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { connect, useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
@@ -44,7 +44,7 @@ const Film: React.FC<props> = ({
 
   //fav a film
   const handleFavorite = (film: IFilm) => {
-    if (favoriteList.includes(film)) {
+    if (favoriteList.some((item) => item.title === film.title)) {
       removeFavorite(film);
       isFavorite(false);
     } else {
@@ -52,10 +52,7 @@ const Film: React.FC<props> = ({
       isFavorite(true);
     }
   };
-  console.log(favoriteList);
-  console.log(favorite);
-  // console.log(favorite);
-  // console.log(isFav);
+
   return (
     <div className='card film-card'>
       <motion.div
@@ -67,7 +64,11 @@ const Film: React.FC<props> = ({
         <div className='title-halves'>
           <h3>Title: {film.title}</h3>
           <div onClick={() => handleFavorite(film)} className='fav-icon'>
-            {favoriteList.includes(film) ? <AiFillHeart /> : <AiOutlineHeart />}
+            {favoriteList.some((item) => item.title === film.title) ? (
+              <AiFillHeart />
+            ) : (
+              <AiOutlineHeart />
+            )}
           </div>
         </div>
         <p>Director: {film.director}</p>

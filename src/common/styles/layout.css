@@ -21,3 +21,18 @@
   display: grid;
   grid-template-columns: 85% 15%;
 }
+
+@media (max-width: 912px) {
+  .container-layout {
+    display: grid;
+    grid-template-columns: 78% 22%;
+  }
+}
+
+@media (max-width: 540px) {
+  .container-layout {
+    display: grid;
+    grid-template-columns: 100%;
+    grid-gap: 2%;
+  }
+}

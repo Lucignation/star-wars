@@ -2,3 +2,17 @@
   display: grid;
   grid-template-columns: repeat(3, 1fr);
 }
+
+@media (max-width: 912px) {
+  .people-grid {
+    display: grid;
+    grid-template-columns: repeat(6, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .people-grid {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}

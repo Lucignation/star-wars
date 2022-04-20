@@ -12,8 +12,8 @@ import Film from '../../pages/film/film.page';
 import Planet from '../../pages/planet/planet.page';
 
 //CSS styling
-import './app.component.css';
-import '../../common/styles';
+import './app.component.css'; //modular style
+import '../../common/styles'; //general styles
 
 const App: React.FC = () => {
   return (

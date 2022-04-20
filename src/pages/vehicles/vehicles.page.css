@@ -5,3 +5,17 @@
   /* padding: 10%; */
   padding: 2% 5%;
 }
+
+@media (max-width: 912px) {
+  .vehicles-container {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 540px) {
+  .vehicles-container {
+    display: grid;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
