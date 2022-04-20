@@ -16,3 +16,19 @@
   margin-top: 9px;
   /* margin-left: 19px; */
 }
+
+.navbar-mobile {
+  display: none;
+}
+
+@media (max-width: 912px) {
+  .navbar-mobile {
+    display: block;
+    z-index: 500;
+
+    /* background: green; */
+  }
+  .navbar-desktop {
+    display: none;
+  }
+}

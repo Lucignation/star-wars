@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom/client';
-import App from './components/app/app.component';
+import App from '@/components/app/app.component';
 
 //CSS styles
 import './index.css';

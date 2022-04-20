@@ -2,14 +2,14 @@ import React from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 //import from folders
-import Home from '../../pages/home/home.page';
+import Home from '@/pages/home/home.page';
 import Header from '../header/header.component';
 import Footer from '../footer/footer.component';
-import People from '../../pages/people/people.page';
-import Films from '../../pages/films/films.page';
-import Vehicles from '../../pages/vehicles/vehicles.page';
-import Film from '../../pages/film/film.page';
-import Planet from '../../pages/planet/planet.page';
+import People from '@/pages/people/people.page';
+import Films from '@/pages/films/films.page';
+import Vehicles from '@/pages/vehicles/vehicles.page';
+import Film from '@/pages/film/film.page';
+import Planet from '@/pages/planet/planet.page';
 
 //CSS styling
 import './app.component.css'; //modular style

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
-import { Store } from '../../store/types';
 
 //import from folders
-import PeopleComponent from '../../components/people/people.component';
-import Search from '../../components/search/search.component';
-import { getPeople } from '../../store/actions';
-import { IPeople } from '../../common/interfaces/IPeople';
+import PeopleComponent from '@/components/people/people.component';
+import Search from '@/components/search/search.component';
+import { getPeople } from '@/store/actions';
+import { IPeople } from '@/common/interfaces/IPeople';
+import { Store } from '@/store/types';
 
 //CSS styles
 import './people.page.css';
-import Spinner from '../../utils/Spinner/Spinner';
+import Spinner from '@/utils/Spinner/Spinner';
 
 type myProps = {
   isLoading: boolean;

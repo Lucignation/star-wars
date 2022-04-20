@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 //importing files
-import Film from '../../components/film/film.component';
-import { Store } from '../../store/types';
-import { IFilm } from '../../common/interfaces/IFilm';
-import Search from '../../components/search/search.component';
+import Film from '@/components/film/film.component';
+import { Store } from '@/store/types';
+import { IFilm } from '@/common/interfaces/IFilm';
+import Search from '@/components/search/search.component';
 
 //CSS styles
 import './films.page.css';
-import { getFilms, isFavorite } from '../../store/actions';
-import Spinner from '../../utils/Spinner/Spinner';
+import { getFilms, isFavorite } from '@/store/actions';
+import Spinner from '@/utils/Spinner/Spinner';
 
 type props = {
   isLoading: boolean;

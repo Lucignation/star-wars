@@ -1,0 +1,32 @@
+.back-drop {
+  display: grid;
+  grid-template-rows: repeat(4, 1r);
+  width: 100%;
+  text-align: center;
+  background-color: #fff;
+  /* height: auto; */
+  position: absolute;
+  right: 0;
+  left: 0;
+  /* top: 10%; */
+  padding-top: 10%;
+  padding-bottom: 100vh;
+  animation: sidebar 0.2s ease-in;
+}
+
+.back-drop-link {
+  text-decoration: none;
+  font-size: 18px;
+  margin-bottom: 20px;
+  padding: 5% 1%;
+  color: #272727a8;
+}
+
+@keyframes sidebar {
+  from {
+    left: 200px;
+  }
+  to {
+    left: 0px;
+  }
+}

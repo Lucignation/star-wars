@@ -5,15 +5,15 @@ import { motion } from 'framer-motion';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 //interfaces
-import { IPeople } from '../../common/interfaces/IPeople';
+import { IPeople } from '@/common/interfaces/IPeople';
 
 //import from folders
-import { getFilm, removeFav, isFavorite } from '../../store/actions';
-import Link from '../../components/link/link.component';
+import { getFilm, removeFav, isFavorite } from '@/store/actions';
+import Link from '@/components/link/link.component';
 
 //CSS styles
 import './people.component.css';
-import { Store } from '../../store/types';
+import { Store } from '@/store/types';
 
 type myProps = {
   person: IPeople;

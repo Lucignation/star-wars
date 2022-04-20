@@ -1,8 +1,8 @@
-import { IPeople } from '../common/interfaces/IPeople';
-import { IFilm } from '../common/interfaces/IFilm';
-import { IVehicle } from '../common/interfaces/IVehicle';
-import { IPlanet } from '../common/interfaces/IPlanet';
-import { IStarship } from '../common/interfaces/IStarship';
+import { IPeople } from '@/common/interfaces/IPeople';
+import { IFilm } from '@/common/interfaces/IFilm';
+import { IVehicle } from '@/common/interfaces/IVehicle';
+import { IPlanet } from '@/common/interfaces/IPlanet';
+import { IStarship } from '@/common/interfaces/IStarship';
 
 export type Store = {
   resources?: any;
@@ -23,8 +23,4 @@ export type Store = {
   planetFav: boolean;
   peopleFav: boolean;
   vehicleFav: boolean;
-};
-
-export type Error = {
-  detail: string;
 };

@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
 //import from folders
-import { Store } from '../../store/types';
-import { IPlanet } from '../../common/interfaces/IPlanet';
-import { getFilm } from '../../store/actions';
-import Button from '../../components/button/button.component';
+import { Store } from '@/store/types';
+import { IPlanet } from '@/common/interfaces/IPlanet';
+import { getFilm } from '@/store/actions';
+import Button from '@/components/button/button.component';
 
 //CSS styles
 import './planet.page.css';

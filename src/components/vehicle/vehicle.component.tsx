@@ -5,9 +5,9 @@ import { motion } from 'framer-motion';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 //import from folders
-import { Store } from '../../store/types';
-import { IVehicle } from '../../common/interfaces/IVehicle';
-import { getFilm, isFavorite, removeFav } from '../../store/actions';
+import { Store } from '@/store/types';
+import { IVehicle } from '@/common/interfaces/IVehicle';
+import { getFilm, isFavorite, removeFav } from '@/store/actions';
 import Link from '../link/link.component';
 
 //CSS styles

@@ -1,17 +1,16 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 //CSS styles
 import './search.component.css';
 
+type props = {
+  search: string;
+  setSearch: any;
+};
 
-type props ={
-    search: string,
-    setSearch: any,
-}
-
-const Search: React.FC<props> = ({search, setSearch}) => {
+const Search: React.FC<props> = ({ search, setSearch }) => {
   return (
-    <form className='search-container'>
+    <div className='search-container'>
       <input
         type='text'
         placeholder='Search'
@@ -19,7 +18,7 @@ const Search: React.FC<props> = ({search, setSearch}) => {
         value={search}
         onChange={(e) => setSearch(e.target.value)}
       />
-    </form>
+    </div>
   );
 };
 

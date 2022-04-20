@@ -1,11 +1,11 @@
 import axios from 'axios';
 import { Dispatch } from 'redux';
 
-import { IPeople } from '../common/interfaces/IPeople';
-import { IFilm } from '../common/interfaces/IFilm';
-import { IPlanet } from '../common/interfaces/IPlanet';
-import { IVehicle } from '../common/interfaces/IVehicle';
-import { IStarship } from '../common/interfaces/IStarship';
+import { IPeople } from '@/common/interfaces/IPeople';
+import { IFilm } from '@/common/interfaces/IFilm';
+import { IPlanet } from '@/common/interfaces/IPlanet';
+import { IVehicle } from '@/common/interfaces/IVehicle';
+import { IStarship } from '@/common/interfaces/IStarship';
 
 export const SET_PEOPLE = 'SET_PEOPLE';
 export const SET_FILMS = 'SET_FILMS';

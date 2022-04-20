@@ -2,15 +2,15 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 
 //Interfaces
-import { IFilm } from '../../common/interfaces/IFilm';
+import { IFilm } from '@/common/interfaces/IFilm';
 
 //redux actions
-import { getPeople, getFilms } from '../../store/actions';
-import { Store } from '../../store/types';
+import { getPeople, getFilms } from '@/store/actions';
+import { Store } from '@/store/types';
 
 //import from file
 import People from '../people/people.page';
-import Spinner from '../../utils/Spinner/Spinner';
+import Spinner from '@/utils/Spinner/Spinner';
 
 //CSS styles
 import './home.page.css';

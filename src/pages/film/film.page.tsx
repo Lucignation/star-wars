@@ -4,10 +4,10 @@ import { useNavigate } from 'react-router-dom';
 import moment from 'moment';
 
 //import from folders
-import { Store } from '../../store/types';
-import { getPlanet } from '../../store/actions';
-import Spinner from '../../utils/Spinner/Spinner';
-import Button from '../../components/button/button.component';
+import { Store } from '@/store/types';
+import { getPlanet } from '@/store/actions';
+import Spinner from '@/utils/Spinner/Spinner';
+import Button from '@/components/button/button.component';
 
 type props = {
   getPlanet: any;
