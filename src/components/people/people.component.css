@@ -1,6 +1,11 @@
 .people-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid #a8acb030;
+}
+
+.people-grid:last-child {
+  border-bottom: none;
 }
 
 @media (max-width: 912px) {

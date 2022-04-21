@@ -9,7 +9,12 @@ import { IStarship } from '@/common/interfaces/IStarship';
 
 //import from folders
 import Link from '../link/link.component';
-import { getFilm, removeFav, isFavorite } from '../../store/actions';
+import {
+  getFilm,
+  removeFav,
+  isFavorite,
+  getStarship,
+} from '../../store/actions';
 import { StarRating } from '@/utils/Rating/Rating';
 
 //CSS styles
@@ -21,7 +26,8 @@ type props = {
   getFilm: any;
   resourcses: Store;
   removeFav: (startship: IStarship) => void;
-  isFavorite: (fav: boolean) => void
+  isFavorite: (fav: boolean) => void;
+  getStarship: any;
 };
 
 const StarShip: FC<props> = ({
@@ -30,6 +36,7 @@ const StarShip: FC<props> = ({
   resourcses,
   removeFav,
   isFavorite,
+  getStarship,
 }) => {
   const navigate = useNavigate();
 
@@ -42,7 +49,7 @@ const StarShip: FC<props> = ({
     navigate(`/films/${res.title}`);
   };
 
-  //fav a vehicle
+  //fav a starship
   const handleFavorite = (starship: IStarship) => {
     if (favoriteList.some((item) => item.name === starship.name)) {
       removeFav(starship);
@@ -52,6 +59,17 @@ const StarShip: FC<props> = ({
       isFavorite(true);
     }
   };
+
+  //load selected starship page
+  const handleSelectedStarShip = async (ship: string) => {
+    const shipNum: number = parseInt(ship.split('/')[5]); //selected film number
+    console.log(shipNum);
+    const res = await getStarship(shipNum);
+    console.log(res);
+    navigate(`/starships/${res.name}`);
+  };
+
+  console.log(starship);
 
   return (
     <div className='starship-card'>
@@ -77,41 +95,43 @@ const StarShip: FC<props> = ({
           </div>
         </div>
 
-        <p>Model: {starship.model}</p>
-        <p>Manufacturer: {starship.manufacturer}</p>
+        <div onClick={() => handleSelectedStarShip(starship.url)}>
+          <p>Model: {starship.model}</p>
+          <p>Manufacturer: {starship.manufacturer}</p>
 
-        <div className='half'>
-          <p>Cargo Capacity: {starship.cargo_capacity}</p>
-          <p>MGLT: {starship.MGLT}</p>
-          <p>Consumable: {starship.consumables}</p>
-        </div>
+          <div className='half'>
+            <p>Cargo Capacity: {starship.cargo_capacity}</p>
+            <p>MGLT: {starship.MGLT}</p>
+            <p>Consumable: {starship.consumables}</p>
+          </div>
 
-        <div className='half'>
-          <p>Crew: {starship.crew}</p>
+          <div className='half'>
+            <div>Crew: {starship.crew}</div>
 
-          <p>Max Speed: {starship.max_atmosphering_speed}</p>
-          <p>Length: {starship.length}</p>
-        </div>
-        <p className='rate'>
-          Hyper Drive Rating:
-          <span>
-            <StarRating
-              rate={Math.trunc(parseInt(starship.hyperdrive_rating))}
-            />
-          </span>
-        </p>
+            <p>Max Speed: {starship.max_atmosphering_speed}</p>
+            <p>Length: {starship.length}</p>
+          </div>
+          <div className='rate'>
+            Hyper Drive Rating:
+            <span>
+              <StarRating
+                rate={Math.trunc(parseInt(starship.hyperdrive_rating))}
+              />
+            </span>
+          </div>
 
-        <div className='half'>
-          <p>Passengers: {starship.passengers}</p>
-          <p>Class: {starship.starship_class}</p>
-        </div>
+          <div className='half'>
+            <p>Passengers: {starship.passengers}</p>
+            <p>Class: {starship.starship_class}</p>
+          </div>
 
-        <div className='starship-film-link'>
-          {starship.films.map((film, index) => (
-            <div key={index} onClick={() => handleSelectedFilm(film)}>
-              <Link title='film' />
-            </div>
-          ))}
+          <div className='starship-film-link'>
+            {starship.films.map((film, index) => (
+              <div key={index} onClick={() => handleSelectedFilm(film)}>
+                <Link title='film' />
+              </div>
+            ))}
+          </div>
         </div>
       </motion.div>
     </div>
@@ -122,6 +142,9 @@ const mapPropsToState = (state: Store) => ({
   resourcses: state.resources,
 });
 
-export default connect(mapPropsToState, { getFilm, removeFav, isFavorite })(
-  StarShip
-);
+export default connect(mapPropsToState, {
+  getFilm,
+  removeFav,
+  isFavorite,
+  getStarship,
+})(StarShip);

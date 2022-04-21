@@ -15,6 +15,7 @@ export const APP_STATE = 'APP_STATE';
 export const SET_PLANETS = 'SET_PLANETS';
 export const SET_VEHICLES = 'SET_VEHICLES';
 export const SET_STARSHIPS = 'SET_STARSHIPS';
+export const SET_STARSHIP = 'SET_STARSHIP';
 export const SET_FAVORITE = 'SET_FAVORITE';
 export const REMOVE_FAVORITE = 'REMOVE_FAVORITE';
 export const REMOVE_FILM_FAVORITE = 'REMOVE_FILM_FAVORITE';
@@ -28,6 +29,7 @@ export type ActionTypes =
   | { type: typeof SET_PLANET; payload: IPlanet }
   | { type: typeof SET_VEHICLES; payload: IVehicle[] }
   | { type: typeof SET_STARSHIPS; payload: IStarship[] }
+  | { type: typeof SET_STARSHIP; payload: IStarship }
   | { type: typeof SET_FAVORITE; payload: boolean }
   | { type: typeof REMOVE_FAVORITE; payload: void }
   | { type: typeof REMOVE_FILM_FAVORITE; payload: void };
@@ -120,6 +122,24 @@ export const getFilm = (id: number) => async (dispatch: Dispatch) => {
   });
 };
 
+//get request to single starship endpoint
+export const getStarship = (id: number) => async (dispatch: Dispatch) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      dispatch(setLoading());
+      const url = `https://${process.env.REACT_APP_STARSHIPS}/${id}`;
+      console.log(url);
+      const ship = await axios(url);
+      dispatch({ type: SET_STARSHIP, payload: ship.data });
+      resolve(ship.data);
+      console.log(ship.data);
+    } catch (error) {
+      console.error(error);
+      reject(error);
+    }
+  });
+};
+
 //get request to planet endpoint
 export const getPlanet =
   (id: number) =>
@@ -141,6 +161,7 @@ export const getPlanet =
 export const getStarships = () => async (dispatch: Dispatch) => {
   return new Promise(async (resolve, reject) => {
     try {
+      dispatch(setLoading());
       const url = `https://${process.env.REACT_APP_STARSHIPS}`;
       const starship = await axios.get(url);
       dispatch({ type: SET_STARSHIPS, payload: starship.data.results });

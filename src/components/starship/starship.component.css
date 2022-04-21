@@ -10,7 +10,8 @@
   grid-template-columns: repeat(2, 1fr);
 }
 
-.rate {
-  /* display: grid;
-  gr */
+@media (max-width: 540px) {
+  .half {
+    /* font-size: 15px; */
+  }
 }

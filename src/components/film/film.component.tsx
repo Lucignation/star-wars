@@ -6,7 +6,13 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 //import file
 import { IFilm } from '@/common/interfaces/IFilm';
-import { getPlanet, isFavorite, removeFavorite } from '@/store/actions';
+import {
+  getPlanet,
+  isFavorite,
+  removeFavorite,
+  getStarship,
+  getFilm,
+} from '@/store/actions';
 import { Store } from '@/store/types';
 import Link from '../link/link.component';
 
@@ -19,6 +25,8 @@ type props = {
   getPlanet: any;
   isFavorite: (fav: boolean) => void;
   removeFavorite: (film: IFilm) => void;
+  getStarship: any;
+  getFilm: any;
 };
 
 const Film: React.FC<props> = ({
@@ -27,6 +35,8 @@ const Film: React.FC<props> = ({
   getPlanet,
   isFavorite,
   removeFavorite,
+  getStarship,
+  getFilm,
 }) => {
   let { favoriteList } = resourcses;
   const navigate = useNavigate();
@@ -40,6 +50,13 @@ const Film: React.FC<props> = ({
     navigate(`/planets/${res.name}`);
   };
 
+  //load selected film page
+  const handleSelectedFilm = async (film: string) => {
+    const filmNum: number = parseInt(film.split('/')[5]); //selected film number
+    const res = await getFilm(filmNum);
+    navigate(`/films/${res.title}`);
+  };
+
   //fav a film
   const handleFavorite = (film: IFilm) => {
     if (favoriteList.some((item) => item.title === film.title)) {
@@ -49,6 +66,15 @@ const Film: React.FC<props> = ({
       favoriteList.push(film);
       isFavorite(true);
     }
+  };
+
+  //load selected starship page
+  const handleSelectedStarShip = async (ship: string) => {
+    const shipNum: number = parseInt(ship.split('/')[5]); //selected film number
+    console.log(shipNum);
+    const res = await getStarship(shipNum);
+    console.log(res);
+    navigate(`/starships/${res.name}`);
   };
 
   return (
@@ -73,15 +99,28 @@ const Film: React.FC<props> = ({
             )}
           </div>
         </div>
-        <p>Director: {film.director}</p>
-        <p>Release Date: {film.release_date}</p>
+        <div onClick={() => handleSelectedFilm(film.url)}>
+          <p>Director: {film.director}</p>
+          <p>Release Date: {film.release_date}</p>
 
-        <div className='film-grid'>
-          {film.planets.map((planet, index) => (
-            <div key={index} onClick={() => planetSelected(planet, index)}>
-              <Link title={`Planet ${index + 1}`} />
-            </div>
-          ))}
+          <div className='film-grid'>
+            {film.planets.map((planet, index) => (
+              <div key={index} onClick={() => planetSelected(planet, index)}>
+                <Link title={`Planet ${index + 1}`} />
+              </div>
+            ))}
+          </div>
+
+          <div className='film-grid'>
+            {film.starships.map((ship, index) => (
+              <div key={index} onClick={() => handleSelectedStarShip(ship)}>
+                <Link
+                  title={`Starship ${index + 1}`}
+                  linkType='secondeary-link'
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </motion.div>
     </div>
@@ -99,4 +138,6 @@ export default connect(mapPropsToState, {
   getPlanet,
   isFavorite,
   removeFavorite,
+  getStarship,
+  getFilm,
 })(Film);

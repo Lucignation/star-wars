@@ -12,7 +12,7 @@ export interface IFilm {
   release_date: string;
   characters: IPeople[];
   planets: string[];
-  starships: IStarship[];
+  starships: string[];
   vehicles: IVehicle[];
   species: string[];
   created: string;

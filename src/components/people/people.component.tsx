@@ -8,7 +8,7 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { IPeople } from '@/common/interfaces/IPeople';
 
 //import from folders
-import { getFilm, removeFav, isFavorite } from '@/store/actions';
+import { getFilm, removeFav, isFavorite, getStarship } from '@/store/actions';
 import Link from '@/components/link/link.component';
 
 //CSS styles
@@ -18,6 +18,7 @@ import { Store } from '@/store/types';
 type myProps = {
   person: IPeople;
   getFilm: any;
+  getStarship: any;
   removeFav: (people: IPeople) => void;
   resourcses: Store;
   isFavorite: (fav: boolean) => void;
@@ -26,6 +27,7 @@ type myProps = {
 const PeopleComponent: React.FC<myProps> = ({
   person,
   getFilm,
+  getStarship,
   removeFav,
   resourcses,
   isFavorite,
@@ -39,6 +41,15 @@ const PeopleComponent: React.FC<myProps> = ({
     const filmNum: number = parseInt(film.split('/')[5]); //selected film number
     const res = await getFilm(filmNum);
     navigate(`/films/${res.title}`);
+  };
+
+  //load selected starship page
+  const handleSelectedStarShip = async (ship: string) => {
+    const shipNum: number = parseInt(ship.split('/')[5]); //selected film number
+    console.log(shipNum);
+    const res = await getStarship(shipNum);
+    console.log(res);
+    navigate(`/starships/${res.name}`);
   };
 
   //fav a person
@@ -93,6 +104,17 @@ const PeopleComponent: React.FC<myProps> = ({
             </div>
           ))}
         </div>
+
+        <div className='people-grid'>
+          {person.starships.map((ship, index) => (
+            <div key={index} onClick={() => handleSelectedStarShip(ship)}>
+              <Link
+                title={`StarShip ${index + 1}`}
+                linkType='secondeary-link'
+              />
+            </div>
+          ))}
+        </div>
       </motion.div>
     </div>
   );
@@ -106,4 +128,5 @@ export default connect(mapPropsToState, {
   getFilm,
   isFavorite,
   removeFav,
+  getStarship,
 })(PeopleComponent);
