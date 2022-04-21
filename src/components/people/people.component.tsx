@@ -8,7 +8,13 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 import { IPeople } from '@/common/interfaces/IPeople';
 
 //import from folders
-import { getFilm, removeFav, isFavorite, getStarship } from '@/store/actions';
+import {
+  getFilm,
+  removeFav,
+  isFavorite,
+  getStarship,
+  getPerson,
+} from '@/store/actions';
 import Link from '@/components/link/link.component';
 
 //CSS styles
@@ -22,6 +28,7 @@ type myProps = {
   removeFav: (people: IPeople) => void;
   resourcses: Store;
   isFavorite: (fav: boolean) => void;
+  getPerson: any;
 };
 
 const PeopleComponent: React.FC<myProps> = ({
@@ -31,6 +38,7 @@ const PeopleComponent: React.FC<myProps> = ({
   removeFav,
   resourcses,
   isFavorite,
+  getPerson,
 }) => {
   const navigate = useNavigate();
 
@@ -63,6 +71,13 @@ const PeopleComponent: React.FC<myProps> = ({
     }
   };
 
+  //load people single page
+  const handleSelectedPerson = async (person: string) => {
+    const personNum: number = parseInt(person.split('/')[5]); //selected film number
+    const res = await getPerson(personNum);
+    navigate(`/people/${res.name}`);
+  };
+
   return (
     <div className='card'>
       <motion.div
@@ -87,33 +102,35 @@ const PeopleComponent: React.FC<myProps> = ({
           </div>
         </div>
 
-        <div className='half'>
-          <h4>Eyes: {person.eye_color}</h4>
-          <h4>Hair: {person.hair_color}</h4>
-        </div>
+        <div onClick={() => handleSelectedPerson(person.url)}>
+          <div className='half'>
+            <h4>Eyes: {person.eye_color}</h4>
+            <h4>Hair: {person.hair_color}</h4>
+          </div>
 
-        <div className='half'>
-          <h4>Height: {person.height}</h4>
-          <h4>Mass: {person.mass}</h4>
-        </div>
+          <div className='half'>
+            <h4>Height: {person.height}</h4>
+            <h4>Mass: {person.mass}</h4>
+          </div>
 
-        <div className='people-grid'>
-          {person.films.map((film, index) => (
-            <div key={index} onClick={() => handleSelectedFilm(film)}>
-              <Link title={`Film ${index + 1}`} linkType='primary-link' />
-            </div>
-          ))}
-        </div>
+          <div className='people-grid'>
+            {person.films.map((film, index) => (
+              <div key={index} onClick={() => handleSelectedFilm(film)}>
+                <Link title={`Film ${index + 1}`} linkType='primary-link' />
+              </div>
+            ))}
+          </div>
 
-        <div className='people-grid'>
-          {person.starships.map((ship, index) => (
-            <div key={index} onClick={() => handleSelectedStarShip(ship)}>
-              <Link
-                title={`StarShip ${index + 1}`}
-                linkType='secondeary-link'
-              />
-            </div>
-          ))}
+          <div className='people-grid'>
+            {person.starships.map((ship, index) => (
+              <div key={index} onClick={() => handleSelectedStarShip(ship)}>
+                <Link
+                  title={`StarShip ${index + 1}`}
+                  linkType='secondeary-link'
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </motion.div>
     </div>
@@ -129,4 +146,5 @@ export default connect(mapPropsToState, {
   isFavorite,
   removeFav,
   getStarship,
+  getPerson,
 })(PeopleComponent);

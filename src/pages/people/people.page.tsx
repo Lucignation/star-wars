@@ -15,9 +15,10 @@ import Spinner from '@/utils/Spinner/Spinner';
 type myProps = {
   isLoading: boolean;
   getPeople: any;
+  homePage?: boolean;
 };
 
-const People: React.FC<myProps> = ({ isLoading, getPeople }) => {
+const People: React.FC<myProps> = ({ isLoading, getPeople, homePage }) => {
   const [search, setSearch] = useState('');
   const [people, setPeople] = useState<IPeople[]>([]);
 
@@ -43,7 +44,9 @@ const People: React.FC<myProps> = ({ isLoading, getPeople }) => {
       ) : people.length === 0 ? (
         <p>There are no people to show for now.</p>
       ) : (
-        <div className='people-container'>
+        <div
+          className={homePage ? 'people-home-container' : 'people-container'}
+        >
           {filterPeople.length === 0 ? (
             <p>No search matched. </p>
           ) : (

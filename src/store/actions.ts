@@ -8,6 +8,7 @@ import { IVehicle } from '@/common/interfaces/IVehicle';
 import { IStarship } from '@/common/interfaces/IStarship';
 
 export const SET_PEOPLE = 'SET_PEOPLE';
+export const SET_PERSON = 'SET_PERSON';
 export const SET_FILMS = 'SET_FILMS';
 export const SET_FILM = 'SET_FILM';
 export const SET_PLANET = 'SET_PLANET';
@@ -22,6 +23,7 @@ export const REMOVE_FILM_FAVORITE = 'REMOVE_FILM_FAVORITE';
 
 export type ActionTypes =
   | { type: typeof SET_PEOPLE; payload: IPeople[] }
+  | { type: typeof SET_PERSON; payload: IPeople }
   | { type: typeof SET_FILMS; payload: IFilm[] }
   | { type: typeof SET_FILM; payload: IFilm }
   | { type: typeof APP_STATE; payload: boolean }
@@ -118,6 +120,21 @@ export const getFilm = (id: number) => async (dispatch: Dispatch) => {
       });
     } catch (error: any) {
       reject(error.detail);
+    }
+  });
+};
+
+//get request to people single endpoint
+export const getPerson = (id: number) => async (dispatch: Dispatch) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      dispatch(setLoading());
+      const url = `https://${process.env.REACT_APP_PEOPLE}/${id}`;
+      const person = await axios.get(url);
+      dispatch({ type: SET_PERSON, payload: person.data });
+      resolve(person.data);
+    } catch (error) {
+      console.log(error);
     }
   });
 };

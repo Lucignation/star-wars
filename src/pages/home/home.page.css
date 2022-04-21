@@ -8,6 +8,10 @@
   height: 100%;
 }
 
+.home-container-title {
+  margin-left: 12%;
+}
+
 @media (max-width: 912px) {
   .home {
     padding: 1% 0%;

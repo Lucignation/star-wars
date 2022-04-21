@@ -12,6 +12,7 @@ import Film from '@/pages/film/film.page';
 import Planet from '@/pages/planet/planet.page';
 import StarShips from '@/pages/starships/starships.page';
 import StarShip from '@/pages/starship/starship.page';
+import PeoplePage from '@/pages/peoplePage/poeplePage.page';
 
 //CSS styling
 import './app.component.css'; //modular style
@@ -31,6 +32,7 @@ const App: React.FC = () => {
           <Route path='/planets/:id' element={<Planet />} />
           <Route path='/starships' element={<StarShips />} />
           <Route path='/starships/:id' element={<StarShip />} />
+          <Route path='/people/:id' element={<PeoplePage />} />
         </Routes>
         <Footer />
       </Router>

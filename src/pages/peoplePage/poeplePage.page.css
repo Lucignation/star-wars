@@ -1,0 +1,38 @@
+.quarter {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2%;
+  border-bottom: 1px solid #a8acb030;
+}
+
+.quarter-link {
+  width: 50%;
+}
+
+.people-page-links {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  margin-top: 5%;
+  margin-bottom: 5%;
+}
+
+.people-page-container {
+  padding: 2% 5%;
+}
+
+.people-page-container small:first-child {
+  display: block;
+  margin-bottom: 7px;
+}
+
+@media (max-width: 540px) {
+  .quarter {
+    grid-template-columns: repeat(1, 1fr);
+  }
+  .people-page-links {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    margin-top: 5%;
+    margin-bottom: 5%;
+  }
+}

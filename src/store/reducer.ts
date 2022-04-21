@@ -12,6 +12,7 @@ import {
   REMOVE_FAVORITE,
   REMOVE_FILM_FAVORITE,
   SET_STARSHIPS,
+  SET_PERSON,
   SET_STARSHIP,
 } from './actions';
 import { Store } from './types';
@@ -167,6 +168,13 @@ function resourcesReducer(state: Store = initialState, action: ActionTypes) {
       return {
         ...state,
         starship: action.payload,
+        isLoading: false,
+      };
+
+    case SET_PERSON:
+      return {
+        ...state,
+        people: action.payload,
         isLoading: false,
       };
 

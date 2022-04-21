@@ -128,7 +128,7 @@ const StarShip: FC<props> = ({
           <div className='starship-film-link'>
             {starship.films.map((film, index) => (
               <div key={index} onClick={() => handleSelectedFilm(film)}>
-                <Link title='film' />
+                <Link title={`Film ${index + 1}`} />
               </div>
             ))}
           </div>

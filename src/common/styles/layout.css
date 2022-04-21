@@ -1,6 +1,6 @@
 .container-layout {
   display: grid;
-  grid-template-columns: 78% 20%;
+  grid-template-columns: 76% 22%;
   grid-gap: 2%;
 }
 

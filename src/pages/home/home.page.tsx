@@ -52,9 +52,9 @@ const Home: React.FC<myProps> = ({ getFilms, getFilm }) => {
   return (
     <div className='home'>
       <div className='home-container container-layout'>
-        <People />
+        <People homePage={true} />
         <div className='home-film-sidebar'>
-          <h2>Quick Films</h2>
+          <h2 className='home-container-title'>Quick Films</h2>
           {films.length <= 0 ? (
             <Spinner />
           ) : (
