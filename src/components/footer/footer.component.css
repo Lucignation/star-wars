@@ -1,6 +1,17 @@
 .footer {
-  position: absolute;
-  bottom: 0px;
   text-align: center;
-  left: 50%;
+  border-top: 2px solid #0097d338;
+  padding: 1%;
+}
+
+.footer-logo {
+  font-family: 'Krona One', sans-serif;
+  font-size: 12px;
+}
+
+@media (max-width: 540px) {
+  .footer {
+    left: 25%;
+    padding: 5%;
+  }
 }

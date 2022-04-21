@@ -5,3 +5,14 @@
   padding-bottom: 8%;
   cursor: pointer;
 }
+
+@media (max-width: 912px) {
+  .sidebar {
+    margin-left: 80%;
+    font-size: 33px;
+    margin-top: 6%;
+    padding-bottom: 8%;
+    cursor: pointer;
+    outline: none;
+  }
+}

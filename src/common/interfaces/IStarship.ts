@@ -15,7 +15,7 @@ export interface IStarship {
   MGLT: string;
   starship_class: string;
   pilots: [];
-  films: IFilm[];
+  films: string[];
   created: string;
   edited: string;
   url: string;

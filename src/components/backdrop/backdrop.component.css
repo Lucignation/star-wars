@@ -20,6 +20,13 @@
   margin-bottom: 20px;
   padding: 5% 1%;
   color: #272727a8;
+  animation: back-drop-link 0.2s ease-in;
+  transition: all 0.2s ease-in;
+}
+
+.back-drop-link:hover {
+  background-color: #272727a8;
+  color: #fff;
 }
 
 @keyframes sidebar {
@@ -28,5 +35,33 @@
   }
   to {
     left: 0px;
+  }
+}
+
+@keyframes back-drop-link {
+  from {
+    top: 200px;
+  }
+  to {
+    top: 0px;
+  }
+}
+
+@media (max-width: 912px) {
+  .back-drop-link {
+    font-size: 25px;
+    margin-bottom: 7px;
+    padding: 5% 1%;
+    color: #272727a8;
+  }
+}
+
+@media (max-width: 540px) {
+  .back-drop-link {
+    text-decoration: none;
+    font-size: 18px;
+    margin-bottom: 20px;
+    padding: 5% 1%;
+    color: #272727a8;
   }
 }

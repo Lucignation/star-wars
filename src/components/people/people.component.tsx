@@ -62,6 +62,7 @@ const PeopleComponent: React.FC<myProps> = ({
       >
         <div className='title-halves'>
           <h2>{person.name}</h2>
+
           <div onClick={() => handleFavorite(person)} className='fav-icons'>
             {favoriteList.some((item) => item.name === person.name) ? (
               <div className='fav-icon'>
@@ -74,6 +75,7 @@ const PeopleComponent: React.FC<myProps> = ({
             )}
           </div>
         </div>
+
         <div className='half'>
           <h4>Eyes: {person.eye_color}</h4>
           <h4>Hair: {person.hair_color}</h4>
@@ -83,6 +85,7 @@ const PeopleComponent: React.FC<myProps> = ({
           <h4>Height: {person.height}</h4>
           <h4>Mass: {person.mass}</h4>
         </div>
+
         <div className='people-grid'>
           {person.films.map((film, index) => (
             <div key={index} onClick={() => handleSelectedFilm(film)}>

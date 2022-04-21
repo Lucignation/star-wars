@@ -7,6 +7,10 @@ import './navbar.component.css';
 const Navbar: React.FC = () => {
   const location = useLocation();
   let filmMatch = useMatch('/films/:id');
+  let planetMatch = useMatch('/planets/:id');
+  let peopleMatch = useMatch('/people/:id');
+  let vehicleMatch = useMatch('/vehicles/:id');
+  let starshipMatch = useMatch('/starships/:id');
   return (
     <nav className='navbar'>
       <NavLink
@@ -17,7 +21,12 @@ const Navbar: React.FC = () => {
       </NavLink>
       <NavLink
         to='/people'
-        className={location.pathname === '/people' ? 'active-navbar' : ''}
+        className={
+          location.pathname === '/people' ||
+          location.pathname === peopleMatch?.pathname
+            ? 'active-navbar'
+            : ''
+        }
       >
         People
       </NavLink>
@@ -34,9 +43,26 @@ const Navbar: React.FC = () => {
       </NavLink>
       <NavLink
         to='/vehicles'
-        className={location.pathname === '/vehicles' ? 'active-navbar' : ''}
+        className={
+          location.pathname === '/vehicles' ||
+          location.pathname === vehicleMatch?.pathname
+            ? 'active-navbar'
+            : ''
+        }
       >
         Vehicles
+      </NavLink>
+
+      <NavLink
+        to='/starships'
+        className={
+          location.pathname === '/starships' ||
+          location.pathname === starshipMatch?.pathname
+            ? 'active-navbar'
+            : ''
+        }
+      >
+        Starships
       </NavLink>
     </nav>
   );

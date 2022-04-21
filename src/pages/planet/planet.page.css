@@ -1,3 +1,43 @@
 .planet-page-container {
   padding: 2% 5%;
 }
+
+.planet-top-description small:first-child {
+  display: block;
+  margin-bottom: 7px;
+}
+
+.planet-top-description {
+  margin-bottom: 30px;
+  color: #272727a8;
+}
+
+.planet-page-title {
+  margin-bottom: 4px;
+  margin-top: 70px;
+}
+
+.planet-film-grid {
+  display: grid;
+  grid-template-columns: repeat(8, 1fr);
+  margin-top: 50px;
+}
+
+.planet-film-link {
+  background-color: #0097d3ce;
+  text-align: center;
+  color: #fff;
+  margin-right: 20px;
+  padding: 6px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+@media (max-width: 540px) {
+  .planet-page-item {
+    font-size: 14px;
+  }
+  .planet-film-grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}

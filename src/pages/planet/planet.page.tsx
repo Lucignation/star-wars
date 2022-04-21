@@ -35,33 +35,50 @@ const Planet: React.FC<props> = ({ planet, getFilm }) => {
       <div onClick={() => handleBackBtn()}>
         <Button title='Back' />
       </div>
-      <h2>Planet Name:{planet.name}</h2>
-      <div>
+      <h1 className='planet-page-title'>Planet Name:{planet.name}</h1>
+
+      <div className='planet-top-description'>
+        <small>
+          Created:{' '}
+          {moment(planet.created).format('dddd, MMMM Do YYYY, h:mm:ss a')}
+        </small>
+        <small>
+          Edited:{' '}
+          {moment(planet.edited).format('dddd, MMMM Do YYYY, h:mm:ss a')}
+        </small>
+      </div>
+
+      <div className='half planet-page-item'>
         <p>Rotation Period: {planet.rotation_period}</p>
         <p>Rotation Diameter: {planet.diameter}</p>
       </div>
-      <p>Climate: {planet.climate}</p>
-      <div>
+
+      <div className='half planet-page-item'>
+        <p>Climate: {planet.climate}</p>
+        <p>Terrain: {planet.terrain}</p>
+      </div>
+
+      <div className='half planet-page-item'>
         <p>Orbital Period: {planet.orbital_period}</p>
         <p>Population: {planet.population}</p>
       </div>
-      <p>Surface Water: {planet.surface_water}</p>
-      <p>Gravity: {planet.gravity}</p>
-      <p>Terrain: {planet.terrain}</p>
-      <div>
+
+      <div className='half planet-page-item'>
+        <p>Surface Water: {planet.surface_water}</p>
+        <p>Gravity: {planet.gravity}</p>
+      </div>
+
+      <div className='planet-film-grid'>
         {planet.films.map((film, index) => (
-          <p key={index} onClick={() => handleSelectedFilm(film)}>
+          <p
+            key={index}
+            onClick={() => handleSelectedFilm(film)}
+            className='planet-film-link'
+          >
             Film {index + 1}
           </p>
         ))}
       </div>
-      <p>
-        Created:{' '}
-        {moment(planet.created).format('dddd, MMMM Do YYYY, h:mm:ss a')}
-      </p>
-      <p>
-        Edited: {moment(planet.edited).format('dddd, MMMM Do YYYY, h:mm:ss a')}
-      </p>
     </div>
   );
 };

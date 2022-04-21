@@ -1,0 +1,16 @@
+.starship-card {
+  box-shadow: 0px 4px 35px 0px #a8acb030;
+  border-radius: 4px;
+  padding: 6% 12%;
+}
+
+.starship-film-link,
+.rate {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.rate {
+  /* display: grid;
+  gr */
+}

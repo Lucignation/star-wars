@@ -1,6 +1,6 @@
 .navbar {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
+  grid-template-columns: repeat(5, 1fr);
   text-align: center;
 }
 
@@ -10,9 +10,18 @@
   font-weight: bold;
   font-size: 16x;
   padding: 17px 14px;
+  transition: all 0.3s ease-in-out;
 }
 
 .active-navbar {
   background-color: #0097d3ce;
   color: #fff !important;
+}
+.active-navbar:active {
+  transition: all 0.3 ease-in-out;
+}
+
+.navbar a:hover {
+  background-color: #272727a8;
+  color: #fff;
 }

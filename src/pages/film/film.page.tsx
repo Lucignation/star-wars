@@ -8,6 +8,10 @@ import { Store } from '@/store/types';
 import { getPlanet } from '@/store/actions';
 import Spinner from '@/utils/Spinner/Spinner';
 import Button from '@/components/button/button.component';
+import ScrollToTop from '@/utils/ScrollToTop/ScrollToTop'; //takes to the top
+
+//CSS styles
+import './film.page.css';
 
 type props = {
   getPlanet: any;
@@ -29,6 +33,7 @@ const Film: React.FC<props> = ({ getPlanet, resources }) => {
   };
   return (
     <div className='card film-card'>
+      <ScrollToTop />
       {isLoading ? (
         <Spinner />
       ) : (
@@ -36,31 +41,42 @@ const Film: React.FC<props> = ({ getPlanet, resources }) => {
           <div onClick={() => handleBackBtn()}>
             <Button title='Back' />
           </div>
-          <h2>Title: {film?.title}</h2>
-          <p>Director: {film?.director}</p>
-          <p>
+          <h1 className='film-page-title'>Title: {film?.title}</h1>
+          <small className='film-release-date'>
             Release Date:{' '}
             {moment(film?.release_date).format('dddd, MMMM Do YYYY')}
-          </p>
-          <p>Episode: {film?.episode_id}</p>
-          <div className='film-planet-grid'>
+          </small>
+          <div className='film-top-description'>
+            <p>Director: {film?.director}</p>
+            <p>Episode: {film?.episode_id}</p>
+          </div>
+
+          <div className='film-description'>
+            <h4>Opening Crawl:</h4>
+            <p>{film?.opening_crawl}</p>
+          </div>
+
+          <div className='film-bottom-description'>
+            <small>
+              Created:{' '}
+              {moment(film?.created).format('dddd, MMMM Do YYYY, h:mm:ss a')}
+            </small>
+            <small>
+              Edited:{' '}
+              {moment(film?.edited).format('dddd, MMMM Do YYYY, h:mm:ss a')}
+            </small>
+          </div>
+
+          <div className='film-planet-grids'>
             {film?.planets.map((planet, index) => (
-              <p key={index} onClick={() => handleSelectedPlanet(planet)}>
+              <p
+                key={index}
+                onClick={() => handleSelectedPlanet(planet)}
+                className='film-planet-link'
+              >
                 Planet {index + 1}
               </p>
             ))}
-          </div>
-          <p>
-            Created:{' '}
-            {moment(film?.created).format('dddd, MMMM Do YYYY, h:mm:ss a')}
-          </p>
-          <p>
-            Edited:{' '}
-            {moment(film?.edited).format('dddd, MMMM Do YYYY, h:mm:ss a')}
-          </p>
-          <div>
-            <h4>Opening Crawl:</h4>
-            <p>{film?.opening_crawl}</p>
           </div>
         </div>
       )}

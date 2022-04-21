@@ -1,11 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 //Interfaces
 import { IFilm } from '@/common/interfaces/IFilm';
 
 //redux actions
-import { getPeople, getFilms } from '@/store/actions';
+import { getPeople, getFilms, getFilm } from '@/store/actions';
 import { Store } from '@/store/types';
 
 //import from file
@@ -14,14 +15,19 @@ import Spinner from '@/utils/Spinner/Spinner';
 
 //CSS styles
 import './home.page.css';
+import Link from '@/components/link/link.component';
 
 type myProps = {
   getFilms: any;
+  getFilm: any;
 };
 
-const Home: React.FC<myProps> = ({ getFilms }) => {
+const Home: React.FC<myProps> = ({ getFilms, getFilm }) => {
   const [films, setFilms] = useState<IFilm[]>([]);
 
+  const navigate = useNavigate();
+
+  //fetch films onload
   useEffect(() => {
     const fetch = async () => {
       const filmRes = await getFilms();
@@ -36,6 +42,13 @@ const Home: React.FC<myProps> = ({ getFilms }) => {
     };
   }, [getFilms]);
 
+  //load selected film page
+  const handleSelectedFilm = async (film: string) => {
+    const filmNum: number = parseInt(film.split('/')[5]); //selected film number
+    const res = await getFilm(filmNum);
+    navigate(`/films/${res.title}`);
+  };
+
   return (
     <div className='home'>
       <div className='home-container container-layout'>
@@ -47,9 +60,12 @@ const Home: React.FC<myProps> = ({ getFilms }) => {
           ) : (
             films.map((film, index) => (
               <div className='card film-card' key={index}>
-                <p>Title: {film.title}</p>
+                <h4>Title: {film.title}</h4>
                 <p>Director: {film.director}</p>
                 <p>Release Date: {film.release_date}</p>
+                <div onClick={() => handleSelectedFilm(film.url)}>
+                  <Link title='View Film' />
+                </div>
               </div>
             ))
           )}
@@ -67,4 +83,5 @@ const mapPropsToState = (state: Store) => ({
 export default connect(mapPropsToState, {
   getPeople,
   getFilms,
+  getFilm,
 })(Home);

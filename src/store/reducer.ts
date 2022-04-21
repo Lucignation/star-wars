@@ -11,6 +11,7 @@ import {
   SET_FAVORITE,
   REMOVE_FAVORITE,
   REMOVE_FILM_FAVORITE,
+  SET_STARSHIPS,
 } from './actions';
 import { Store } from './types';
 
@@ -152,6 +153,12 @@ function resourcesReducer(state: Store = initialState, action: ActionTypes) {
         ...state,
         vehicles: action.payload,
         isLoading: false,
+      };
+
+    case SET_STARSHIPS:
+      return {
+        ...state,
+        starships: action.payload,
       };
 
     case SET_FAVORITE:

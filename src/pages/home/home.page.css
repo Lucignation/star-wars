@@ -21,6 +21,10 @@
     background: #cecece1c;
     display: block;
     margin-bottom: 14rem !important;
+    text-align: center;
+  }
+
+  .film-card {
   }
 
   .home-film-sidebar h2 {

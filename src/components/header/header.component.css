@@ -25,8 +25,10 @@
   .navbar-mobile {
     display: block;
     z-index: 500;
+  }
 
-    /* background: green; */
+  .logo {
+    margin-top: 23px;
   }
   .navbar-desktop {
     display: none;

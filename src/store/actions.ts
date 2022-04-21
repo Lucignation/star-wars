@@ -137,6 +137,21 @@ export const getPlanet =
     });
   };
 
+//get request to starship endpoint
+export const getStarships = () => async (dispatch: Dispatch) => {
+  return new Promise(async (resolve, reject) => {
+    try {
+      const url = `https://${process.env.REACT_APP_STARSHIPS}`;
+      const starship = await axios.get(url);
+      dispatch({ type: SET_STARSHIPS, payload: starship.data.results });
+      resolve(starship.data.results);
+    } catch (error) {
+      console.log(error);
+      reject(error);
+    }
+  });
+};
+
 //remove film fav from favorite list
 export const removeFavorite = (film: IFilm) => (dispatch: Dispatch) => {
   dispatch({ type: REMOVE_FILM_FAVORITE, payload: film.title });
@@ -144,7 +159,7 @@ export const removeFavorite = (film: IFilm) => (dispatch: Dispatch) => {
 
 //remove people fav from the favorite list
 export const removeFav =
-  (people: IPeople | IVehicle) => (dispatch: Dispatch) => {
+  (people: IPeople | IVehicle | IStarship) => (dispatch: Dispatch) => {
     dispatch({ type: REMOVE_FAVORITE, payload: people.name });
   };
 

@@ -59,6 +59,7 @@ const Vehicle: React.FC<props> = ({
       >
         <div className='title-halves'>
           <h3>Name: {vehicle.name}</h3>
+
           <div onClick={() => handleFavorite(vehicle)} className='fav-icons'>
             {favoriteList.some((item) => item.name === vehicle.name) ? (
               <div className='fav-icon'>

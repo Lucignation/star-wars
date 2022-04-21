@@ -1,0 +1,11 @@
+.starship-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 2%;
+  /* padding: 10%; */
+  padding: 2% 5%;
+}
+
+.starships-container {
+  margin-bottom: 13%;
+}
