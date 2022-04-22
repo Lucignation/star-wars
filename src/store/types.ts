@@ -18,9 +18,11 @@ export type Store = {
   planet: IPlanet;
   starships: Array<IStarship>;
   starship: IStarship;
-  favoriteList: any[];
-  filmFav: boolean;
-  planetFav: boolean;
-  peopleFav: boolean;
-  vehicleFav: boolean;
+  favoriteList:
+    | IStarship[]
+    | IPlanet[]
+    | IVehicle[]
+    | IPeople[]
+    | IFilm[]
+    | any[];
 };

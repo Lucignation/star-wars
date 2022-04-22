@@ -1,5 +1,5 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import { FC } from 'react';
+import { connect, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
@@ -7,6 +7,7 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 //import from folders
 import { Store } from '@/store/types';
 import { IVehicle } from '@/common/interfaces/IVehicle';
+import { IFilm } from '@/common/interfaces/IFilm';
 import { getFilm, isFavorite, removeFav } from '@/store/actions';
 import Link from '../link/link.component';
 
@@ -15,21 +16,22 @@ import './vehicle.component.css';
 
 type props = {
   vehicle: IVehicle;
-  getFilm: any;
-  resources: Store;
+  getFilm: (id: number) => IFilm | any;
   isFavorite: (fav: boolean) => void;
   removeFav: (vehicle: IVehicle) => void;
+  showToast: (toast: string | any) => void;
 };
-const Vehicle: React.FC<props> = ({
+const Vehicle: FC<props> = ({
   vehicle,
   getFilm,
-  resources,
   isFavorite,
   removeFav,
+  showToast,
 }) => {
   const navigate = useNavigate();
+  const data = useSelector((state: Store) => state.resources);
 
-  const { favoriteList } = resources;
+  const { favoriteList } = data;
 
   //a film is selected
   const handleSelectedFilm = async (film: string) => {
@@ -40,14 +42,30 @@ const Vehicle: React.FC<props> = ({
 
   //fav a vehicle
   const handleFavorite = (vehicle: IVehicle) => {
-    if (favoriteList.some((item) => item.name === vehicle.name)) {
+    if (favoriteList.some((item: IVehicle) => item.name === vehicle.name)) {
       removeFav(vehicle);
       isFavorite(false);
+      showToast(`${vehicle.name} is removed`);
     } else {
       favoriteList.push(vehicle);
       isFavorite(true);
+      showToast(`${vehicle.name} is faved`);
     }
   };
+
+  const {
+    name,
+    model,
+    max_atmosphering_speed,
+    consumables,
+    cost_in_credits,
+    manufacturer,
+    crew,
+    passengers,
+    cargo_capacity,
+    vehicle_class,
+    films,
+  } = vehicle;
 
   return (
     <div className='card film-card'>
@@ -58,10 +76,10 @@ const Vehicle: React.FC<props> = ({
         transition={{ ease: 'easeOut', duration: 0.3 }}
       >
         <div className='title-halves'>
-          <h3>Name: {vehicle.name}</h3>
+          <h3>Name: {name}</h3>
 
           <div onClick={() => handleFavorite(vehicle)} className='fav-icons'>
-            {favoriteList.some((item) => item.name === vehicle.name) ? (
+            {favoriteList.some((item: IVehicle) => item.name === name) ? (
               <div className='fav-icon'>
                 <AiFillHeart />
               </div>
@@ -73,21 +91,21 @@ const Vehicle: React.FC<props> = ({
           </div>
         </div>
 
-        <h4>Model: {vehicle.model}</h4>
-        <h4>Manufacturer: {vehicle.manufacturer}</h4>
-        <p>Cost: {vehicle.cost_in_credits}</p>
+        <h4>Model: {model}</h4>
+        <h4>Manufacturer: {manufacturer}</h4>
+        <p>Cost: {cost_in_credits}</p>
         <div>
-          <p>Atmophering Speed: {vehicle.max_atmosphering_speed}</p>
-          <p>Crew: {vehicle.crew}</p>
-          <p>Passengers: {vehicle.passengers}</p>
+          <p>Atmophering Speed: {max_atmosphering_speed}</p>
+          <p>Crew: {crew}</p>
+          <p>Passengers: {passengers}</p>
         </div>
         <div>
-          <p>Cargo Capacity: {vehicle.cargo_capacity}</p>
-          <p>Consumable: {vehicle.consumables}</p>
-          <p>Vehicle Class: {vehicle.vehicle_class}</p>
+          <p>Cargo Capacity: {cargo_capacity}</p>
+          <p>Consumable: {consumables}</p>
+          <p>Vehicle Class: {vehicle_class}</p>
         </div>
         <div className='vehicle-grid'>
-          {vehicle.films.map((film, index) => (
+          {films.map((film, index) => (
             <div key={index} onClick={() => handleSelectedFilm(film)}>
               <Link title={`Film ${index + 1}`} linkType='primary-link' />
             </div>
@@ -98,10 +116,7 @@ const Vehicle: React.FC<props> = ({
   );
 };
 
-const mapPropsToState = (state: Store) => ({
-  resources: state.resources,
-});
-export default connect(mapPropsToState, {
+export default connect(null, {
   getFilm,
   isFavorite,
   removeFav,

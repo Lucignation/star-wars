@@ -1,6 +1,6 @@
 .navbar {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
+  grid-template-columns: repeat(6, 1fr);
   text-align: center;
 }
 
@@ -24,4 +24,24 @@
 .navbar a:hover {
   background-color: #272727a8;
   color: #fff;
+}
+
+.fav-count {
+  position: absolute;
+  top: -6px;
+  right: 80px;
+  background-color: #0097d3ce;
+  color: #fff !important;
+  padding: 4px 9px;
+  border-radius: 50px;
+}
+
+.fav-count-active {
+  position: absolute;
+  top: -6px;
+  right: 80px;
+  background-color: #272727a8;
+  color: #fff !important;
+  padding: 4px 9px;
+  border-radius: 50px;
 }

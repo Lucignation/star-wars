@@ -114,10 +114,6 @@ const initialState: Store = {
     url: '',
   },
   favoriteList: [],
-  filmFav: false,
-  peopleFav: false,
-  planetFav: false,
-  vehicleFav: false,
 };
 
 function resourcesReducer(state: Store = initialState, action: ActionTypes) {

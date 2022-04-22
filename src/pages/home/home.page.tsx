@@ -18,12 +18,13 @@ import './home.page.css';
 import Link from '@/components/link/link.component';
 
 type myProps = {
-  getFilms: any;
-  getFilm: any;
+  getFilms: () => IFilm[] | any;
+  getFilm: (id: number) => IFilm | any;
 };
 
 const Home: React.FC<myProps> = ({ getFilms, getFilm }) => {
   const [films, setFilms] = useState<IFilm[]>([]);
+  const [showMessage, setShowMessage] = useState<string>('');
 
   const navigate = useNavigate();
 

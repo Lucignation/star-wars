@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { AnimatePresence, motion } from 'framer-motion';
 import { connect } from 'react-redux';
 
 //importing files
@@ -30,6 +31,7 @@ const Films: React.FC<props> = ({
   const [search, setSearch] = useState<string>('');
 
   const [films, setFilms] = useState<IFilm[]>([]);
+  const [toast, setToast] = useState<string>('');
 
   useEffect(() => {
     const fetch = async () => {
@@ -45,12 +47,33 @@ const Films: React.FC<props> = ({
     };
   }, [getFilms]);
 
+  //remove the toast in 2 secs
+  setTimeout(() => {
+    if (toast) {
+      setToast('');
+    }
+  }, 2000);
+
+  //filter films
   let filterFilms = films.filter(({ title }) => {
     return title.toLowerCase().indexOf(search.toLowerCase()) >= 0;
   });
 
   return (
     <div>
+      <AnimatePresence>
+        {toast && (
+          <motion.div
+            key='toast'
+            layout
+            initial={{ opacity: 0, y: 60, scale: 0.3 }}
+            animate={{ opacity: 1, y: 0, scale: 1 }}
+            exit={{ opacity: 0, y: 60, scale: 0.5 }}
+          >
+            <p className='toast'>{toast}</p>{' '}
+          </motion.div>
+        )}
+      </AnimatePresence>
       <Search search={search} setSearch={setSearch} />
       {isLoading && films.length === 0 ? (
         <Spinner />
@@ -61,7 +84,9 @@ const Films: React.FC<props> = ({
           {filterFilms.length === 0 ? (
             <p>No search matched. </p>
           ) : (
-            filterFilms.map((film, index) => <Film key={index} film={film} />)
+            filterFilms.map((film, index) => (
+              <Film key={index} film={film} showToast={setToast} />
+            ))
           )}
         </div>
       )}

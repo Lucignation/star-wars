@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useMemo } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 //import from folders
@@ -13,12 +13,14 @@ import Planet from '@/pages/planet/planet.page';
 import StarShips from '@/pages/starships/starships.page';
 import StarShip from '@/pages/starship/starship.page';
 import PeoplePage from '@/pages/peoplePage/poeplePage.page';
+import Favorites from '@/pages/favorites/favorites.page';
 
 //CSS styling
 import './app.component.css'; //modular style
 import '../../common/styles'; //general styles
 
 const App: React.FC = () => {
+
   return (
     <div className='app'>
       <Router>
@@ -33,6 +35,7 @@ const App: React.FC = () => {
           <Route path='/starships' element={<StarShips />} />
           <Route path='/starships/:id' element={<StarShip />} />
           <Route path='/people/:id' element={<PeoplePage />} />
+          <Route path='/favorites' element={<Favorites />} />
         </Routes>
         <Footer />
       </Router>

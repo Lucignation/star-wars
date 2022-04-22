@@ -1,8 +1,10 @@
 import { FC } from 'react';
 import { NavLink, useLocation, useMatch } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 //CSS styles
 import './backdrop.component.css';
+import { Store } from '@/store/types';
 
 type props = {
   setIsOpen: any;
@@ -11,11 +13,15 @@ type props = {
 
 const BackDrop: FC<props> = ({ setIsOpen, isOpen }) => {
   const location = useLocation();
+  const data = useSelector((state: Store) => state.resources);
+
   let filmMatch = useMatch('/films/:id');
   let planetMatch = useMatch('/planets/:id');
   let peopleMatch = useMatch('/people/:id');
   let vehicleMatch = useMatch('/vehicles/:id');
   let starshipMatch = useMatch('/starships/:id');
+
+  const { favoriteList } = data;
 
   return (
     <nav className='back-drop'>
@@ -81,6 +87,21 @@ const BackDrop: FC<props> = ({ setIsOpen, isOpen }) => {
         onClick={() => setIsOpen(!isOpen)}
       >
         Starships
+      </NavLink>
+
+      <NavLink
+        to='/favorites'
+        className={
+          location.pathname === '/favorites'
+            ? 'active-navbar back-drop-link'
+            : 'back-drop-link'
+        }
+        onClick={() => setIsOpen(!isOpen)}
+      >
+        Favorites
+        {favoriteList.length > 0 && (
+          <p className='fav-count'>{favoriteList.length}</p>
+        )}
       </NavLink>
     </nav>
   );

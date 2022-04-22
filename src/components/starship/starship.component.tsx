@@ -6,6 +6,7 @@ import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
 //import interfaces
 import { IStarship } from '@/common/interfaces/IStarship';
+import { IFilm } from '@/common/interfaces/IFilm';
 
 //import from folders
 import Link from '../link/link.component';
@@ -16,18 +17,19 @@ import {
   getStarship,
 } from '../../store/actions';
 import { StarRating } from '@/utils/Rating/Rating';
+import { Store } from '@/store/types';
 
 //CSS styles
 import './starship.component.css';
-import { Store } from '@/store/types';
 
 type props = {
   starship: IStarship;
-  getFilm: any;
+  getFilm: (id: number) => IFilm | any;
   resourcses: Store;
   removeFav: (startship: IStarship) => void;
   isFavorite: (fav: boolean) => void;
-  getStarship: any;
+  getStarship: (id: number) => IStarship | any;
+  showToast: (toast: string | any) => void;
 };
 
 const StarShip: FC<props> = ({
@@ -37,6 +39,7 @@ const StarShip: FC<props> = ({
   removeFav,
   isFavorite,
   getStarship,
+  showToast,
 }) => {
   const navigate = useNavigate();
 
@@ -54,9 +57,11 @@ const StarShip: FC<props> = ({
     if (favoriteList.some((item) => item.name === starship.name)) {
       removeFav(starship);
       isFavorite(false);
+      showToast(`${starship.name} is removed`);
     } else {
       favoriteList.push(starship);
       isFavorite(true);
+      showToast(`${starship.name} is faved`);
     }
   };
 

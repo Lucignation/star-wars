@@ -1,11 +1,15 @@
-import React from 'react';
-import { connect } from 'react-redux';
+import { FC } from 'react';
+import { connect, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
 
-//import file
+//import interfaces
 import { IFilm } from '@/common/interfaces/IFilm';
+import { IPlanet } from '@/common/interfaces/IPlanet';
+import { IStarship } from '@/common/interfaces/IStarship';
+
+//import file
 import {
   getPlanet,
   isFavorite,
@@ -20,25 +24,26 @@ import Link from '../link/link.component';
 import './film.component.css';
 
 type props = {
-  resourcses: Store;
   film: IFilm;
-  getPlanet: any;
+  getPlanet: (id: number) => IPlanet | any;
   isFavorite: (fav: boolean) => void;
   removeFavorite: (film: IFilm) => void;
-  getStarship: any;
-  getFilm: any;
+  getStarship: (id: number) => IStarship | any;
+  getFilm: (id: number) => IFilm | any;
+  showToast: (toast: string | any) => void;
 };
 
-const Film: React.FC<props> = ({
-  resourcses,
+const Film: FC<props> = ({
   film,
   getPlanet,
   isFavorite,
   removeFavorite,
   getStarship,
   getFilm,
+  showToast,
 }) => {
-  let { favoriteList } = resourcses;
+  const data = useSelector((state: Store) => state.resources);
+  let { favoriteList } = data;
   const navigate = useNavigate();
 
   // const [isFav, setIsFav] = useState<boolean>(favorite);
@@ -59,12 +64,14 @@ const Film: React.FC<props> = ({
 
   //fav a film
   const handleFavorite = (film: IFilm) => {
-    if (favoriteList.some((item) => item.title === film.title)) {
+    if (favoriteList.some((item: IFilm) => item.title === film.title)) {
       removeFavorite(film);
       isFavorite(false);
+      showToast(`${film.title} is removed`);
     } else {
       favoriteList.push(film);
       isFavorite(true);
+      showToast(`${film.title} is faved`);
     }
   };
 
@@ -77,6 +84,8 @@ const Film: React.FC<props> = ({
     navigate(`/starships/${res.name}`);
   };
 
+  const { title, url, director, release_date, planets, starships } = film;
+
   return (
     <div className='card film-card'>
       <motion.div
@@ -86,9 +95,9 @@ const Film: React.FC<props> = ({
         transition={{ ease: 'easeOut', duration: 0.3 }}
       >
         <div className='title-halves'>
-          <h3>Title: {film.title}</h3>
+          <h3>Title: {title}</h3>
           <div onClick={() => handleFavorite(film)} className='fav-icons'>
-            {favoriteList.some((item) => item.title === film.title) ? (
+            {favoriteList.some((item: IFilm) => item.title === title) ? (
               <div className='fav-icon'>
                 <AiFillHeart />
               </div>
@@ -99,12 +108,12 @@ const Film: React.FC<props> = ({
             )}
           </div>
         </div>
-        <div onClick={() => handleSelectedFilm(film.url)}>
-          <p>Director: {film.director}</p>
-          <p>Release Date: {film.release_date}</p>
+        <div onClick={() => handleSelectedFilm(url)}>
+          <p>Director: {director}</p>
+          <p>Release Date: {release_date}</p>
 
           <div className='film-grid'>
-            {film.planets.map((planet, index) => (
+            {planets.map((planet, index) => (
               <div key={index} onClick={() => planetSelected(planet, index)}>
                 <Link title={`Planet ${index + 1}`} />
               </div>
@@ -112,7 +121,7 @@ const Film: React.FC<props> = ({
           </div>
 
           <div className='film-grid'>
-            {film.starships.map((ship, index) => (
+            {starships.map((ship, index) => (
               <div key={index} onClick={() => handleSelectedStarShip(ship)}>
                 <Link
                   title={`Starship ${index + 1}`}
@@ -127,14 +136,7 @@ const Film: React.FC<props> = ({
   );
 };
 
-const mapPropsToState = (state: Store) => ({
-  resourcses: state.resources,
-  isFavorite: state.resources.favorite,
-  favoriteList: state.resources.favoriteList,
-  isFilmFav: state.resources.filmFav,
-});
-
-export default connect(mapPropsToState, {
+export default connect(null, {
   getPlanet,
   isFavorite,
   removeFavorite,

@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { connect } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 //interfaces
 import { IPeople } from '@/common/interfaces/IPeople';
+import { IStarship } from '@/common/interfaces/IStarship';
+import { IFilm } from '@/common/interfaces/IFilm';
 
 //import from folders
 import {
@@ -16,19 +20,19 @@ import {
   getPerson,
 } from '@/store/actions';
 import Link from '@/components/link/link.component';
+import { Store } from '@/store/types';
 
 //CSS styles
 import './people.component.css';
-import { Store } from '@/store/types';
 
 type myProps = {
   person: IPeople;
-  getFilm: any;
-  getStarship: any;
+  getFilm: (id: number) => IFilm | any;
+  getStarship: (id: number) => IStarship | any;
   removeFav: (people: IPeople) => void;
-  resourcses: Store;
   isFavorite: (fav: boolean) => void;
-  getPerson: any;
+  getPerson: (id: number) => IPeople | any;
+  showToast: (toast: string | any) => void;
 };
 
 const PeopleComponent: React.FC<myProps> = ({
@@ -36,13 +40,14 @@ const PeopleComponent: React.FC<myProps> = ({
   getFilm,
   getStarship,
   removeFav,
-  resourcses,
   isFavorite,
   getPerson,
+  showToast,
 }) => {
   const navigate = useNavigate();
+  const data = useSelector((state: Store) => state.resources);
 
-  const { favoriteList } = resourcses;
+  const { favoriteList } = data;
 
   //load selected film page
   const handleSelectedFilm = async (film: string) => {
@@ -62,12 +67,14 @@ const PeopleComponent: React.FC<myProps> = ({
 
   //fav a person
   const handleFavorite = (person: IPeople) => {
-    if (favoriteList.some((item) => item.name === person.name)) {
+    if (favoriteList.some((item: IPeople | any) => item.name === person.name)) {
       removeFav(person);
       isFavorite(false);
+      showToast(`${person.name} is removed`);
     } else {
       favoriteList.push(person);
       isFavorite(true);
+      showToast(`${person.name} is faved`);
     }
   };
 
@@ -90,7 +97,9 @@ const PeopleComponent: React.FC<myProps> = ({
           <h2>{person.name}</h2>
 
           <div onClick={() => handleFavorite(person)} className='fav-icons'>
-            {favoriteList.some((item) => item.name === person.name) ? (
+            {favoriteList.some(
+              (item: IPeople | any) => item.name === person.name
+            ) ? (
               <div className='fav-icon'>
                 <AiFillHeart />
               </div>
@@ -137,11 +146,7 @@ const PeopleComponent: React.FC<myProps> = ({
   );
 };
 
-const mapPropsToState = (state: Store) => ({
-  resourcses: state.resources,
-});
-
-export default connect(mapPropsToState, {
+export default connect(null, {
   getFilm,
   isFavorite,
   removeFav,

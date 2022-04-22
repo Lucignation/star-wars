@@ -22,6 +22,15 @@
   grid-template-columns: 85% 15%;
 }
 
+.toast {
+  position: absolute;
+  right: 0px;
+  background-color: #0097d3ce;
+  color: #fff !important;
+  padding: 10px;
+  padding-left: 30px;
+}
+
 @media (max-width: 912px) {
   .container-layout {
     display: grid;
