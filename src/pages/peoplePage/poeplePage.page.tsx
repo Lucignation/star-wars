@@ -156,10 +156,10 @@ const PeoplePage: FC<props> = ({
             ))}
           </div>
 
-          <div>
+          <div className='people-page-links'>
             {starships.map((ship: string, index: number) => (
               <div key={index} onClick={() => handleSelectedStarShip(ship)}>
-                <Link title={`Film ${index + 1}`} />
+                <Link title={`Starship ${index + 1}`} />
               </div>
             ))}
           </div>

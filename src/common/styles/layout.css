@@ -29,7 +29,7 @@
 }
 
 .toast {
-  position: absolute;
+  position: fixed;
   right: 0px;
   background-color: #0097d3ce;
   color: #fff !important;
