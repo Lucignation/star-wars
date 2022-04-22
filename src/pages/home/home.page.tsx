@@ -24,7 +24,6 @@ type myProps = {
 
 const Home: React.FC<myProps> = ({ getFilms, getFilm }) => {
   const [films, setFilms] = useState<IFilm[]>([]);
-  const [showMessage, setShowMessage] = useState<string>('');
 
   const navigate = useNavigate();
 
