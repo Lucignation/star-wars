@@ -4,6 +4,7 @@
   grid-gap: 2%;
   /* padding: 10%; */
   padding: 2% 5%;
+  margin-bottom: 3%;
 }
 
 @media (max-width: 912px) {

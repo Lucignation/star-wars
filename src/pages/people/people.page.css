@@ -3,6 +3,7 @@
   grid-template-columns: repeat(3, 1fr);
   grid-gap: 2%;
   padding: 2% 5%;
+  margin-bottom: 3%;
 }
 
 .people-home-container {

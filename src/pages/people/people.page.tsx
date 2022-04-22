@@ -52,8 +52,8 @@ const People: React.FC<myProps> = ({ isLoading, getPeople, homePage }) => {
           <motion.div
             key='toast'
             layout
-            initial={{ opacity: 0, y: 60, scale: 0.3 }}
-            animate={{ opacity: 1, y: 0, scale: 1 }}
+            initial={{ opacity: 0, y: 80, scale: 0.3 }}
+            animate={{ opacity: 1, y: 50, scale: 1 }}
             exit={{ opacity: 0, y: 60, scale: 0.5 }}
           >
             <p className='toast'>{toast}</p>{' '}

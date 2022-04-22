@@ -2,6 +2,10 @@
   text-align: center;
   border-top: 2px solid #0097d338;
   padding: 1%;
+  position: fixed;
+  bottom: 0;
+  background-color: #fff;
+  margin-top: 10px;
 }
 
 .footer-logo {

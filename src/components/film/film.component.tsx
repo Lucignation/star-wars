@@ -87,7 +87,7 @@ const Film: FC<props> = ({
   const { title, url, director, release_date, planets, starships } = film;
 
   return (
-    <div className='card film-card'>
+    <div className='film-card'>
       <motion.div
         initial={{ y: -250 }}
         animate={{ y: 10 }}

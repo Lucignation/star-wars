@@ -1,10 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { connect, useSelector } from 'react-redux';
 import { motion } from 'framer-motion';
 import { AiFillHeart, AiOutlineHeart } from 'react-icons/ai';
-import { ToastContainer, toast } from 'react-toastify';
-import 'react-toastify/dist/ReactToastify.css';
 
 //interfaces
 import { IPeople } from '@/common/interfaces/IPeople';
@@ -86,7 +84,7 @@ const PeopleComponent: React.FC<myProps> = ({
   };
 
   return (
-    <div className='card'>
+    <div className='people-card'>
       <motion.div
         initial={{ y: -250 }}
         animate={{ y: 10 }}
@@ -130,7 +128,7 @@ const PeopleComponent: React.FC<myProps> = ({
             ))}
           </div>
 
-          <div className='people-grid'>
+          <div className='people-startship-grid'>
             {person.starships.map((ship, index) => (
               <div key={index} onClick={() => handleSelectedStarShip(ship)}>
                 <Link

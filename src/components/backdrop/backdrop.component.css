@@ -9,8 +9,9 @@
   right: 0;
   left: 0;
   /* top: 10%; */
-  padding-top: 10%;
+  padding-top: 15%;
   padding-bottom: 100vh;
+  margin-top: 7%;
   animation: sidebar 0.2s ease-in;
 }
 
@@ -63,5 +64,10 @@
     margin-bottom: 20px;
     padding: 5% 1%;
     color: #272727a8;
+  }
+
+  .fav-count {
+    top: 35%;
+    right: 32%;
   }
 }

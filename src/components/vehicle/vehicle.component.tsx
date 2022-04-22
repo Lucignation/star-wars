@@ -68,7 +68,7 @@ const Vehicle: FC<props> = ({
   } = vehicle;
 
   return (
-    <div className='card film-card'>
+    <div className='vehicle-card'>
       <motion.div
         initial={{ y: -250 }}
         animate={{ y: 10 }}

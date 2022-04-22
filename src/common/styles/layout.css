@@ -10,6 +10,12 @@
   border-radius: 4px;
 }
 
+.grid-card {
+  box-shadow: 0px 4px 35px 0px #a8acb030;
+  border-radius: 4px;
+  padding: 6% 12%;
+}
+
 .half {
   display: grid;
   grid-template-columns: 50% 50%;
@@ -28,7 +34,7 @@
   background-color: #0097d3ce;
   color: #fff !important;
   padding: 10px;
-  padding-left: 30px;
+  /* padding-left: 30px; */
 }
 
 @media (max-width: 912px) {
